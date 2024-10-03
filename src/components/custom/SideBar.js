@@ -1,3 +1,5 @@
+"use client";
+
 import { Menu } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
@@ -43,8 +45,8 @@ function SideBar() {
               <AccordionContent>
                 <ul className="flex flex-col gap-4">
                   {semesterDetails.map(({ name, href }, index) => (
-                    <li>
-                      <SideLink title={name} href={href} key={index} />
+                    <li key={index}>
+                      <SideLink title={name} href={href} />
                     </li>
                   ))}
                 </ul>

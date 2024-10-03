@@ -1,26 +1,23 @@
-"use client";
-
 import Link from "next/link";
-import NavMenu from "./NavMenu";
-import SideBar from "./SideBar";
+import Container from "./Container";
+import MenuBar from "./MenuBar";
 
-import { useMediaQuery } from "react-responsive";
+import dynamic from "next/dynamic";
 
 function NavBar() {
-  const isDesktopOrLaptop = useMediaQuery({ query: "(min-width: 768px)" });
-
   return (
     <nav className="flex justify-center">
-      <div className="flex justify-between items-center p-6 w-full max-w-7xl">
+      <Container className="flex justify-between items-center">
         <Link href={"/"} className="font-bold text-2xl">
           CSIT Info
         </Link>
         <div className="flex items-center">
-          {isDesktopOrLaptop ? <NavMenu /> : <SideBar />}
+          <MenuBar />
         </div>
-      </div>
+      </Container>
     </nav>
   );
 }
 
-export default NavBar;
+// don't know what this does but it fixed that thing called hydration error which I had never heard before
+export default dynamic(() => Promise.resolve(NavBar), { ssr: false });
