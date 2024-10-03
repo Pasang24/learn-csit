@@ -1,7 +1,14 @@
+"use client";
+
 import Link from "next/link";
 import NavMenu from "./NavMenu";
+import SideBar from "./SideBar";
+
+import { useMediaQuery } from "react-responsive";
 
 function NavBar() {
+  const isDesktopOrLaptop = useMediaQuery({ query: "(min-width: 768px)" });
+
   return (
     <nav className="flex justify-center">
       <div className="flex justify-between items-center p-6 w-full max-w-7xl">
@@ -9,7 +16,7 @@ function NavBar() {
           CSIT Info
         </Link>
         <div className="flex items-center">
-          <NavMenu />
+          {isDesktopOrLaptop ? <NavMenu /> : <SideBar />}
         </div>
       </div>
     </nav>
