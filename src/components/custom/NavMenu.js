@@ -44,7 +44,7 @@ function NavMenu() {
           <MenuItem title={"Notices"} href={"/notices"} />
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <MenuItem title={"Course Details"} href={"/details"} />
+          <MenuItem title={"Course Details"} href={"/coursedetails"} />
         </NavigationMenuItem>
       </NavigationMenuList>
     </NavigationMenu>

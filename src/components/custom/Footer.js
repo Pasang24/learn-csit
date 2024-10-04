@@ -39,7 +39,10 @@ function Footer() {
               <Link href={"/notices"} className="text-sm hover:text-slate-400">
                 Notices
               </Link>
-              <Link href={"/details"} className="text-sm hover:text-slate-400">
+              <Link
+                href={"/coursedetails"}
+                className="text-sm hover:text-slate-400"
+              >
                 Course Details
               </Link>
             </div>
