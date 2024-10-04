@@ -16,7 +16,7 @@ export default function Home() {
             </p>
             <Link
               href={"/"}
-              className="bg-white text-black px-4 py-2 rounded font-semibold"
+              className="bg-white text-black px-4 py-2 rounded font-semibold "
             >
               Get Started
             </Link>
@@ -35,7 +35,7 @@ export default function Home() {
             {semData.map(({ name, href, subjects }, index) => (
               <Link
                 href={href}
-                className="flex items-center gap-4 border border-accent rounded p-6 hover:bg-accent"
+                className="flex items-center gap-4 border border-accent rounded p-6 hover:bg-accent hover:scale-105"
                 style={{ transition: "0.3s all ease" }}
                 key={index}
               >
@@ -49,6 +49,20 @@ export default function Home() {
               </Link>
             ))}
           </div>
+        </Container>
+      </section>
+      <section>
+        <Container>
+          <h2 className="font-bold text-3xl mb-12">Recent Notices__</h2>
+          <div>
+            <h3 className="font-bold text-2xl text-center">Comming soon!</h3>
+          </div>
+          <Link
+            href={"/notices"}
+            className="bg-white text-black px-4 py-2 rounded font-semibold "
+          >
+            View All Notices
+          </Link>
         </Container>
       </section>
     </div>
