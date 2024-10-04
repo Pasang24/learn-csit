@@ -10,16 +10,7 @@ import {
 } from "@/components/ui/accordion";
 import Link from "next/link";
 
-const semesterDetails = [
-  { name: "First Semester", href: "/firstsem" },
-  { name: "Second Semester", href: "/secondtsem" },
-  { name: "Third Semester", href: "/thirdsem" },
-  { name: "Fourth Semester", href: "/fourthsem" },
-  { name: "Fifth Semester", href: "/fifthsem" },
-  { name: "Sixth Semester", href: "/sixthsem" },
-  { name: "Seventh Semester", href: "/seventhsem" },
-  { name: "Eighth Semester", href: "/eighthsem" },
-];
+import semData from "@/data/semData";
 
 const SideLink = ({ title, href }) => {
   return (
@@ -44,7 +35,7 @@ function SideBar() {
               </AccordionTrigger>
               <AccordionContent>
                 <ul className="flex flex-col gap-4">
-                  {semesterDetails.map(({ name, href }, index) => (
+                  {semData.map(({ name, href }, index) => (
                     <li key={index}>
                       <SideLink title={name} href={href} />
                     </li>

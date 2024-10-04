@@ -9,16 +9,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu";
 
-const semesterDetails = [
-  { name: "First Semester", href: "/firstsem" },
-  { name: "Second Semester", href: "/secondtsem" },
-  { name: "Third Semester", href: "/thirdsem" },
-  { name: "Fourth Semester", href: "/fourthsem" },
-  { name: "Fifth Semester", href: "/fifthsem" },
-  { name: "Sixth Semester", href: "/sixthsem" },
-  { name: "Seventh Semester", href: "/seventhsem" },
-  { name: "Eighth Semester", href: "/eighthsem" },
-];
+import semData from "@/data/semData";
 
 const MenuItem = ({ title, href }) => {
   return (
@@ -40,7 +31,7 @@ function NavMenu() {
           <NavigationMenuTrigger>Semester</NavigationMenuTrigger>
           <NavigationMenuContent>
             <div className="flex flex-col gap-1 p-1">
-              {semesterDetails.map(({ name, href }, index) => (
+              {semData.map(({ name, href }, index) => (
                 <MenuItem title={name} href={href} key={index} />
               ))}
             </div>

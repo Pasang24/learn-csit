@@ -2,6 +2,8 @@ import Study from "@/components/illustration/Study";
 import Container from "@/components/custom/Container";
 import Link from "next/link";
 
+import semData from "@/data/semData";
+
 export default function Home() {
   return (
     <div className="">
@@ -24,6 +26,31 @@ export default function Home() {
           </div>
         </Container>
       </header>
+      <section className="flex justify-center mt-6">
+        <Container>
+          <h2 className="font-bold text-3xl text-center mb-12">
+            Choose any Semester and get it's resources
+          </h2>
+          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {semData.map(({ name, href, subjects }, index) => (
+              <Link
+                href={href}
+                className="flex items-center gap-4 border border-accent rounded p-6 hover:bg-accent"
+                style={{ transition: "0.3s all ease" }}
+                key={index}
+              >
+                <span className="font-semibold text-2xl">{index + 1}.</span>
+                <div className="flex flex-col gap-1">
+                  <span className="font-semibold text-base">{name}</span>
+                  <span className="font-semibold text-slate-300">
+                    Subjects: {subjects}
+                  </span>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </Container>
+      </section>
     </div>
   );
 }
