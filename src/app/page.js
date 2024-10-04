@@ -55,7 +55,7 @@ export default function Home() {
         <Container>
           <h2 className="font-bold text-3xl mb-12">Recent Notices__</h2>
           <div className="mb-6">
-            <h3 className="font-bold text-2xl text-center">Comming soon!</h3>
+            <h3 className="font-bold text-2xl text-center">Coming soon!</h3>
           </div>
           <Link
             href={"/notices"}

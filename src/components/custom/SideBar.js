@@ -1,7 +1,12 @@
 "use client";
 
 import { Menu } from "lucide-react";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import {
   Accordion,
   AccordionContent,
@@ -14,9 +19,11 @@ import semData from "@/data/semData";
 
 const SideLink = ({ title, href }) => {
   return (
-    <Link href={href} className={`hover:text-slate-400 text-base`}>
-      {title}
-    </Link>
+    <SheetClose asChild>
+      <Link href={href} className={`hover:text-slate-400 text-base`}>
+        {title}
+      </Link>
+    </SheetClose>
   );
 };
 
