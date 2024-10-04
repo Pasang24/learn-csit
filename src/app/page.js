@@ -51,10 +51,10 @@ export default function Home() {
           </div>
         </Container>
       </section>
-      <section>
+      <section className="flex justify-center mt-6">
         <Container>
           <h2 className="font-bold text-3xl mb-12">Recent Notices__</h2>
-          <div>
+          <div className="mb-6">
             <h3 className="font-bold text-2xl text-center">Comming soon!</h3>
           </div>
           <Link

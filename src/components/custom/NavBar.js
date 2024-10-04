@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Logo from "./Logo";
 import Container from "./Container";
 import MenuBar from "./MenuBar";
 
@@ -8,9 +8,7 @@ function NavBar() {
   return (
     <nav className="flex justify-center">
       <Container className="flex justify-between items-center">
-        <Link href={"/"} className="font-bold text-2xl">
-          CSIT Info
-        </Link>
+        <Logo />
         <div className="flex items-center">
           <MenuBar />
         </div>
