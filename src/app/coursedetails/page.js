@@ -1,12 +1,28 @@
 import BreadCrumbs from "@/components/custom/BreadCrumbs";
 import Container from "@/components/custom/Container";
+import SemDataTable from "@/components/custom/SemDataTable";
 import eligibilityData from "@/data/eligibilityData";
-import courseData from "@/data/courseData";
 import { ChevronsRightIcon } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import DataTable from "@/components/custom/DataTable";
+import { db } from "../firebaseConfig";
+import { collection, getDocs, orderBy, query } from "firebase/firestore";
 
-function page() {
+async function page() {
+  let courseData = [];
+
+  try {
+    // fetching course details from firestore
+    const querySnapshot = await getDocs(
+      query(collection(db, "semesters"), orderBy("rank"))
+    );
+    // pushing the fetched data into array
+    querySnapshot.forEach((doc) => {
+      courseData.push(doc.data());
+    });
+  } catch (error) {
+    console.log(error);
+  }
+
   return (
     <div className="flex justify-center">
       <Container>
@@ -35,11 +51,7 @@ function page() {
             <div className="flex flex-col gap-4">
               {courseData.map((course, index) => (
                 <div key={index}>
-                  <DataTable
-                    headData={["Subject", "Course Code"]}
-                    cellData={course.subs}
-                    caption={course.title}
-                  />
+                  <SemDataTable cellData={course.subs} caption={course.title} />
                 </div>
               ))}
             </div>

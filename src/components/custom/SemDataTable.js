@@ -8,24 +8,24 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-function DataTable({ headData, cellData, caption = "" }) {
+function DataTable({ cellData, caption }) {
   return (
     <Table>
       <TableCaption className="caption-top text-base">{caption}</TableCaption>
       <TableHeader>
         <TableRow>
-          {headData.map((head, index) => (
-            <TableHead key={index}>{head}</TableHead>
-          ))}
+          <TableHead>Subject</TableHead>
+          <TableHead>Course Code</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
         {cellData.map((data, index) => {
-          const tableCells = Object.keys(data).map((cell) => (
-            <TableCell key={data[cell]}>{data[cell]}</TableCell>
-          ));
-
-          return <TableRow key={index}>{tableCells}</TableRow>;
+          return (
+            <TableRow key={index}>
+              <TableCell>{data.name}</TableCell>
+              <TableCell>{data.code}</TableCell>
+            </TableRow>
+          );
         })}
       </TableBody>
     </Table>
