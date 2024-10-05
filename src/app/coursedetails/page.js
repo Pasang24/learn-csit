@@ -1,42 +1,12 @@
 import BreadCrumbs from "@/components/custom/BreadCrumbs";
 import Container from "@/components/custom/Container";
+import eligibilityData from "@/data/eligibilityData";
+import courseData from "@/data/courseData";
 import { ChevronsRightIcon } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import DataTable from "@/components/custom/DataTable";
 
 function page() {
-  const eligibilityDetails = [
-    {
-      title: "For Grading System",
-      description:
-        "Should have successfully passed 11 and 12 class in Science stream with minimum full marks 100/100 in Physics and Mathematics respectively and should score final grade 'C' in all subjects.",
-    },
-    {
-      title: "For percentage system",
-      description:
-        "Should have successfully passed 11 and 12 class in Science stream with minimum full marks 100/100 in Physics and Mathematics respectively and should score minimum of second division.",
-    },
-    {
-      title: "For PCL (I.Sc.) or equivalent",
-      description:
-        "Should have successfully passed I.Sc. or equivalent examination with minimum full marks 100/100 in Physics and Mathematics respectively and should score minimum of second division.",
-    },
-    {
-      title: "For A level",
-      description:
-        "Should have successfully passed A Level in science stream (with full marks 100/100 in Physics and Mathematics respectively) and should score minimum D Grade (With or without small letter).",
-    },
-    {
-      title: "For CTEVT",
-      description:
-        "Should have successfully passes three years diploma in Engineering with full marks 100/100 in Physics and Mathematics respectively and should score minimum of second division.",
-    },
-    {
-      title:
-        "For International Education Institute or International University",
-      description:
-        "Should have to submit equivalence letter from Curriculum Development Centre, Sano Thimi, Bhaktapur.",
-    },
-  ];
   return (
     <div className="flex justify-center">
       <Container>
@@ -48,12 +18,12 @@ function page() {
           </TabsList>
           <TabsContent value="Eligibility">
             <div className="flex flex-col gap-4 w-full">
-              {eligibilityDetails.map((detail, index) => (
+              {eligibilityData.map((detail, index) => (
                 <div className="flex flex-col gap-2" key={index}>
-                  <h4 className="font-semibold">
+                  <h4 className="font-semibold text-base">
                     {index + 1}. {detail.title}:
                   </h4>
-                  <p className="flex items-start gap-2">
+                  <p className="flex items-start gap-2 text-sm text-[#a1a1aa]">
                     <ChevronsRightIcon className="min-w-5" />
                     <span>{detail.description}</span>
                   </p>
@@ -62,7 +32,17 @@ function page() {
             </div>
           </TabsContent>
           <TabsContent value="Course Structure">
-            Course Structure of B.Sc.CSIT
+            <div className="flex flex-col gap-4">
+              {courseData.map((course, index) => (
+                <div key={index}>
+                  <DataTable
+                    headData={["Subject", "Course Code"]}
+                    cellData={course.subs}
+                    caption={course.title}
+                  />
+                </div>
+              ))}
+            </div>
           </TabsContent>
         </Tabs>
       </Container>
