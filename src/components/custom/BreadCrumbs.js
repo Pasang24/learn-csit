@@ -9,7 +9,7 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 
-function BreadCrumbs({ links = [], currentPage }) {
+function BreadCrumbs({ links = [], currentPages = [] }) {
   return (
     <Breadcrumb>
       <BreadcrumbList>
@@ -18,20 +18,24 @@ function BreadCrumbs({ links = [], currentPage }) {
             <Link href="/">Home</Link>
           </BreadcrumbLink>
         </BreadcrumbItem>
-        <BreadcrumbSeparator />
         {links.map((link, index) => (
           <React.Fragment key={index}>
+            <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbLink asChild>
+              <BreadcrumbLink className="capitalize" asChild>
                 <Link href={link.href}>{link.name}</Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
-            <BreadcrumbSeparator />
           </React.Fragment>
         ))}
-        <BreadcrumbItem>
-          <BreadcrumbPage>{currentPage}</BreadcrumbPage>
-        </BreadcrumbItem>
+        {currentPages.map((page, index) => (
+          <React.Fragment key={index}>
+            <BreadcrumbSeparator />
+            <BreadcrumbItem>
+              <BreadcrumbPage className="capitalize">{page}</BreadcrumbPage>
+            </BreadcrumbItem>
+          </React.Fragment>
+        ))}
       </BreadcrumbList>
     </Breadcrumb>
   );

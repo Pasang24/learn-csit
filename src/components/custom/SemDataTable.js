@@ -8,7 +8,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 
-function DataTable({ cellData, caption }) {
+function SemDataTable({ cellData, caption }) {
   return (
     <Table>
       <TableCaption className="caption-top text-base">{caption}</TableCaption>
@@ -32,4 +32,4 @@ function DataTable({ cellData, caption }) {
   );
 }
 
-export default DataTable;
+export default SemDataTable;

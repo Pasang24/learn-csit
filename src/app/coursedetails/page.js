@@ -26,7 +26,7 @@ async function page() {
   return (
     <div className="flex justify-center">
       <Container>
-        <BreadCrumbs currentPage="Course Details" />
+        <BreadCrumbs currentPages={["Course Details"]} />
         <Tabs defaultValue="Eligibility" className="flex flex-col gap-6 mt-10">
           <TabsList className="self-center">
             <TabsTrigger value="Eligibility">Eligibility Criteria</TabsTrigger>
