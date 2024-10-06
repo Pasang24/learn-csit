@@ -1,7 +1,8 @@
 import Study from "@/components/illustration/Study";
 import Container from "@/components/custom/Container";
 import Link from "next/link";
-
+import Box from "@/components/custom/Box";
+import BoxContainer from "@/components/custom/BoxContainer";
 import semData from "@/data/semData";
 
 export default function Home() {
@@ -31,14 +32,9 @@ export default function Home() {
           <h2 className="font-bold text-3xl text-center mb-12">
             Choose any Semester and get it's resources
           </h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <BoxContainer>
             {semData.map(({ name, href, subjects }, index) => (
-              <Link
-                href={href}
-                className="flex items-center gap-4 border border-accent rounded p-6 hover:bg-accent hover:scale-105"
-                style={{ transition: "0.3s all ease" }}
-                key={index}
-              >
+              <Box href={href} key={index}>
                 <span className="font-semibold text-2xl">{index + 1}.</span>
                 <div className="flex flex-col gap-1">
                   <span className="font-semibold text-base">{name}</span>
@@ -46,9 +42,9 @@ export default function Home() {
                     Subjects: {subjects}
                   </span>
                 </div>
-              </Link>
+              </Box>
             ))}
-          </div>
+          </BoxContainer>
         </Container>
       </section>
       <section className="flex justify-center mt-6">
