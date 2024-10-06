@@ -3,9 +3,15 @@ import BreadCrumbs from "@/components/custom/BreadCrumbs";
 import Container from "@/components/custom/Container";
 import { db } from "@/app/firebaseConfig";
 import { collection, getDocs, or, query, where } from "firebase/firestore";
-import { semToRank } from "@/utilities/validSem";
+import { semesters, semToRank } from "@/utilities/validSem";
 import BoxContainer from "@/components/custom/BoxContainer";
 import Box from "@/components/custom/Box";
+
+export async function generateStaticParams() {
+  return semesters.map((semester) => ({
+    sem: semester,
+  }));
+}
 
 async function page({ params }) {
   let subsData, electiveData;
@@ -57,12 +63,12 @@ async function page({ params }) {
                   {sub.name.includes("Elective") ? (
                     <div
                       className={
-                        "flex flex-col items-center p-6 w-full h-full border border--accent"
+                        "flex flex-col items-center gap-4 p-6 w-full h-full border border--accent"
                       }
                     >
                       <span className="text-center">{sub.name}</span>
                       <span className="text-center text-sm text-slate-300">
-                        {sub.code}
+                        Elective
                       </span>
                     </div>
                   ) : (

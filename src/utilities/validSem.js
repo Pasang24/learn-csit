@@ -43,4 +43,4 @@ const semToRank = (sem) => {
   return ranks;
 };
 
-export { validSem, semToRank };
+export { semesters, validSem, semToRank };
