@@ -4,7 +4,7 @@ import Container from "@/components/custom/Container";
 import { db } from "@/app/firebaseConfig";
 import { collection, getDocs, or, query, where } from "firebase/firestore";
 import { semesters, semToRank } from "@/utilities/validSem";
-import BoxContainer from "@/components/custom/BoxContainer";
+import { BookText } from "lucide-react";
 import Box from "@/components/custom/Box";
 
 export async function generateStaticParams() {
@@ -56,53 +56,56 @@ async function page({ params }) {
         <BreadCrumbs currentPages={["Semester", `${params.sem} Semester`]} />
         <div>
           <h2 className="text-center text-2xl font-bold my-6">Subjects</h2>
-          <BoxContainer>
+          <div className="grid gap-2">
             {subsData &&
               subsData?.subs?.map((sub) => (
                 <React.Fragment key={sub.code}>
                   {sub.name.includes("Elective") ? (
                     <div
                       className={
-                        "flex flex-col items-center gap-4 p-6 w-full h-full border border--accent"
+                        "flex items-center gap-4 p-3 w-full h-full border border--accent"
                       }
                     >
-                      <span className="text-center">{sub.name}</span>
-                      <span className="text-center text-sm text-slate-300">
-                        Elective
-                      </span>
+                      <BookText size={32} className="min-w-8" />
+                      <div className="flex flex-col gap-2">
+                        <span className="font-semibold">{sub.name}</span>
+                        <span className="text-sm text-slate-300">Elective</span>
+                      </div>
                     </div>
                   ) : (
                     <Box
                       href={`${params.sem}/${sub.name.split(" ").join("-")}`}
-                      className="flex-col"
                     >
-                      <span className="text-center">{sub.name}</span>
-                      <span className="text-center text-sm text-slate-300">
-                        {sub.code}
-                      </span>
+                      <BookText size={32} className="min-w-8" />
+                      <div className="flex flex-col items-start gap-2">
+                        <span className="font-semibold">{sub.name}</span>
+                        <span className="text-sm text-slate-300">
+                          {sub.code}
+                        </span>
+                      </div>
                     </Box>
                   )}
                 </React.Fragment>
               ))}
-          </BoxContainer>
+          </div>
         </div>
         {electiveData && (
           <div>
             <h2 className="text-center text-2xl font-bold my-6">
               {electiveData.title}
             </h2>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-2">
               {subsData &&
                 electiveData?.subs?.map((sub) => (
                   <Box
                     href={`${params.sem}/${sub.name.split(" ").join("-")}`}
-                    className="flex-col"
                     key={sub.code}
                   >
-                    <span className="text-center">{sub.name}</span>
-                    <span className="text-center text-sm text-slate-300">
-                      {sub.code}
-                    </span>
+                    <BookText size={32} className="min-w-8" />
+                    <div className="flex flex-col items-start gap-2">
+                      <span className="font-semibold">{sub.name}</span>
+                      <span className="text-sm text-slate-300">{sub.code}</span>
+                    </div>
                   </Box>
                 ))}
             </div>
