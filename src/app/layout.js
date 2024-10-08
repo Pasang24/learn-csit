@@ -1,6 +1,7 @@
 import NavBar from "@/components/custom/NavBar";
 import Footer from "@/components/custom/Footer";
 import localFont from "next/font/local";
+import "react-photo-view/dist/react-photo-view.css";
 import "./globals.css";
 
 const geistSans = localFont({
