@@ -15,7 +15,7 @@ function ViewSyllabus({ imageUrls }) {
               className="self-start flex gap-2 items-center"
             >
               <BookCopy strokeWidth={1} />
-              <span className="hidden vs:inline">View full syllabus</span>
+              <span>Preview Syllabus</span>
             </Button>
           </PhotoView>
         ) : (

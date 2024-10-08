@@ -5,7 +5,7 @@ async function page({ params }) {
     <div className="flex justify-center">
       <Container>
         <h3 className="font-semibold text-xl text-center">
-          Notes Page. Under Construction!!
+          Past Questions Page. Under Construction!!
         </h3>
       </Container>
     </div>

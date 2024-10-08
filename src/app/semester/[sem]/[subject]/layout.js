@@ -6,6 +6,7 @@ import { notFound } from "next/navigation";
 import { getDownloadURL, listAll, ref } from "firebase/storage";
 import { ArrowDownToLine } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button";
+import SubjectNavBar from "@/components/custom/SubjectNavBar";
 
 async function layout({ params, children }) {
   // fetching subject data from firebase
@@ -67,7 +68,8 @@ async function layout({ params, children }) {
                 <span className="hidden vs:inline">Download Syllabus</span>
               </a>
             </div>
-            <hr className="mt-2" />
+            <hr className="my-2" />
+            <SubjectNavBar />
           </div>
         </Container>
       </div>
