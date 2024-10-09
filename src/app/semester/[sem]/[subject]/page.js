@@ -1,4 +1,29 @@
 import Container from "@/components/custom/Container";
+import { db } from "@/app/firebaseConfig";
+import { collection, getDocs } from "firebase/firestore";
+import { rankToSem } from "@/utilities/rankToSem";
+
+export async function generateStaticParams() {
+  let courseData = [];
+
+  const querySnapshot = await getDocs(collection(db, "semesters"));
+  querySnapshot.forEach((doc) => {
+    courseData.push(doc.data());
+  });
+
+  let paramsData = [];
+
+  courseData.forEach((course) => {
+    let sem = rankToSem(course.rank);
+    const subjectData = course.subs.map((sub) => ({
+      sem,
+      subject: sub.name.split(" ").join("-"),
+    }));
+    paramsData = [...paramsData, ...subjectData];
+  });
+
+  return paramsData;
+}
 
 async function page({ params }) {
   return (
