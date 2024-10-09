@@ -1,28 +1,44 @@
 "use client";
 
-import { PhotoProvider, PhotoView } from "react-photo-view";
+import ImageViewer from "./ImageViewer";
 import { Button } from "../ui/button";
 import { BookCopy } from "lucide-react";
+import { useEffect, useState } from "react";
+import { useHash } from "@/hooks/useHash";
 
 function ViewSyllabus({ imageUrls }) {
+  const hash = useHash();
+  const [visible, setVisible] = useState(hash === "#sem");
+  const [index, setIndex] = useState(0);
+
+  useEffect(() => {
+    setVisible(hash === "#sem");
+  }, [hash]);
+
   return (
-    <PhotoProvider>
-      {imageUrls.map((url, index) => {
-        return index < 1 ? (
-          <PhotoView src={url} key={index}>
-            <Button
-              variant="outline"
-              className="self-start flex gap-2 items-center"
-            >
-              <BookCopy strokeWidth={1} />
-              <span>Preview Syllabus</span>
-            </Button>
-          </PhotoView>
-        ) : (
-          <PhotoView src={url} key={index} />
-        );
-      })}
-    </PhotoProvider>
+    <>
+      <Button
+        variant="outline"
+        className="self-start flex gap-2 items-center"
+        onClick={() => {
+          window.location.hash = "#sem";
+          setVisible(true);
+        }}
+      >
+        <BookCopy strokeWidth={1} />
+        <span>Preview Syllabus</span>
+      </Button>
+
+      <ImageViewer
+        images={imageUrls}
+        visible={visible}
+        onClose={() => {
+          setVisible(false);
+        }}
+        index={index}
+        onIndexChange={setIndex}
+      />
+    </>
   );
 }
 

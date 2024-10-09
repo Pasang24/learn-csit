@@ -20,8 +20,6 @@ function SubjectNavBar() {
 
   const isActive = (href) => href === pathname;
 
-  console.log(pathname);
-
   return (
     //alll of these css have been copied from tabs component of shadcn
     <div className="self-center inline-flex h-9 items-center justify-center rounded-lg bg-muted p-1 text-muted-foreground">

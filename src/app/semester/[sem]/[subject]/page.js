@@ -1,6 +1,6 @@
 import Container from "@/components/custom/Container";
 import { db } from "@/app/firebaseConfig";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { rankToSem } from "@/utilities/rankToSem";
 
 export async function generateStaticParams() {
@@ -26,6 +26,15 @@ export async function generateStaticParams() {
 }
 
 async function page({ params }) {
+  const querySnapshot = await getDocs(
+    query(
+      collection(db, "contents"),
+      where("subjectId", "==", params.subject),
+      orderBy("unit")
+    )
+  );
+
+  querySnapshot.forEach((doc) => console.log(doc.data()));
   return (
     <div className="flex justify-center">
       <Container>
