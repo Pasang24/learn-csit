@@ -55,18 +55,10 @@ async function layout({ params, children }) {
               <p className="text-sm">{subData.obj}</p>
             </div>
             <div className="self-start flex items-center gap-2">
-              <ViewSyllabus imageUrls={syllabusImageUrls} />
-              <a
-                href={syllabusDownloadUrl}
-                target="_blank"
-                download={true}
-                className={`${buttonVariants({
-                  variant: "outline",
-                })} flex gap-2 items-center`}
-              >
-                <ArrowDownToLine strokeWidth={1} />
-                <span className="hidden vs:inline">Download Syllabus</span>
-              </a>
+              <ViewSyllabus
+                imageUrls={syllabusImageUrls}
+                downloadUrl={syllabusDownloadUrl}
+              />
             </div>
             <hr className="my-2" />
             <SubjectNavBar />

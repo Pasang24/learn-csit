@@ -1,9 +1,17 @@
 "use client";
 
+import { CirclePlus, CircleMinus, Download, RotateCw } from "lucide-react";
 import { useEffect } from "react";
 import { PhotoSlider } from "react-photo-view";
 
-function ImageViewer({ images, visible, onClose, index, onIndexChange }) {
+function ImageViewer({
+  images,
+  visible,
+  onClose,
+  index,
+  onIndexChange,
+  download,
+}) {
   useEffect(() => {
     const handleBackButton = () => {
       if (visible) {
@@ -20,7 +28,11 @@ function ImageViewer({ images, visible, onClose, index, onIndexChange }) {
 
   return (
     <PhotoSlider
-      images={images.map((item) => ({ src: item, key: item }))}
+      className="select-none"
+      images={images.map((item) => ({
+        src: item,
+        key: item,
+      }))}
       visible={visible}
       onClose={() => {
         onClose();
@@ -30,6 +42,42 @@ function ImageViewer({ images, visible, onClose, index, onIndexChange }) {
       onIndexChange={onIndexChange}
       loadingElement={<SpinnerLoader />}
       speed={() => 300}
+      toolbarRender={({ onScale, scale, onRotate, rotate }) => {
+        return (
+          <>
+            <span className="PhotoView-Slider__toolbarIcon">
+              <CirclePlus
+                onClick={() => onScale(scale + 0.5)}
+                strokeWidth={2}
+                size={22}
+              />
+            </span>
+            <span className="PhotoView-Slider__toolbarIcon">
+              <CircleMinus
+                onClick={() => onScale(scale - 0.5)}
+                strokeWidth={2}
+                size={22}
+              />
+            </span>
+            <span className="PhotoView-Slider__toolbarIcon">
+              <RotateCw
+                onClick={() => onRotate(rotate + 90)}
+                strokeWidth={2}
+                size={22}
+              />
+            </span>
+            <a
+              href={download}
+              target="_blank"
+              download={true}
+              className="PhotoView-Slider__toolbarIcon mr-2"
+            >
+              <Download strokeWidth={2} size={22} />
+            </a>
+          </>
+        );
+      }}
+      overlayRender={() => {}}
     />
   );
 }

@@ -6,7 +6,7 @@ import { BookCopy } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useHash } from "@/hooks/useHash";
 
-function ViewSyllabus({ imageUrls }) {
+function ViewSyllabus({ imageUrls, downloadUrl }) {
   const hash = useHash();
   const [visible, setVisible] = useState(hash === "#sem");
   const [index, setIndex] = useState(0);
@@ -26,11 +26,12 @@ function ViewSyllabus({ imageUrls }) {
         }}
       >
         <BookCopy strokeWidth={1} />
-        <span>Preview Syllabus</span>
+        <span>Syllabus</span>
       </Button>
 
       <ImageViewer
         images={imageUrls}
+        download={downloadUrl}
         visible={visible}
         onClose={() => {
           setVisible(false);
