@@ -35,7 +35,9 @@ export default function Home() {
           <BoxContainer>
             {semData.map(({ name, href, subjects }, index) => (
               <Box href={href} key={index}>
-                <span className="font-semibold text-2xl">{index + 1}.</span>
+                <span className="font-semibold text-xl sm:text-2xl">
+                  {index + 1}.
+                </span>
                 <div className="flex flex-col gap-1">
                   <span className="font-semibold text-base">{name}</span>
                   <span className="font-semibold text-slate-300">

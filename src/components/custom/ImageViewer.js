@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  CirclePlus,
-  CircleMinus,
-  Download,
-  RotateCw,
-  Maximize,
-} from "lucide-react";
+import { Download, RotateCw, Maximize } from "lucide-react";
 import { useEffect } from "react";
 import { PhotoSlider } from "react-photo-view";
 

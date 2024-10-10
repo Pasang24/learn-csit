@@ -37,15 +37,25 @@ async function page({ params }) {
 
   querySnapshot.forEach((doc) => {
     notesData.push(doc.data());
-    console.log(doc.data());
   });
   return (
     <div className="flex justify-center">
-      <Container>
+      <Container className={"grid gap-2"}>
         {notesData.map((note) => (
-          <div>
-            <h3 className="font-semibold text-center">{`Unit ${note.unit}: ${note.title}`}</h3>
-            <p>{note.content}</p>
+          <div
+            className="flex items-center gap-3 border border-accent p-3 rounded overflow-hidden hover:bg-accent select-none cursor-pointer"
+            style={{ transition: "0.2s all ease" }}
+            key={note.unit}
+          >
+            <span className="font-semibold text-xl sm:text-2xl">
+              {note.unit}.
+            </span>
+            <div className="overflow-hidden">
+              <h3 className="font-semibold mb-2 sm:text-lg">{`${note.title}`}</h3>
+              <p className="text-sm text-slate-300 whitespace-nowrap overflow-hidden overflow-ellipsis">
+                {note.content}
+              </p>
+            </div>
           </div>
         ))}
       </Container>

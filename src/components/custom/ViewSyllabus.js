@@ -8,11 +8,11 @@ import { useHash } from "@/hooks/useHash";
 
 function ViewSyllabus({ imageUrls, downloadUrl }) {
   const hash = useHash();
-  const [visible, setVisible] = useState(hash === "#sem");
+  const [visible, setVisible] = useState(hash === "#syllabus");
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    setVisible(hash === "#sem");
+    setVisible(hash === "#syllabus");
   }, [hash]);
 
   return (
@@ -21,7 +21,7 @@ function ViewSyllabus({ imageUrls, downloadUrl }) {
         variant="outline"
         className="self-start flex gap-2 items-center"
         onClick={() => {
-          window.location.hash = "#sem";
+          window.location.hash = "#syllabus";
           setVisible(true);
         }}
       >
