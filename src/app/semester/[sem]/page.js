@@ -6,6 +6,12 @@ import { collection, getDocs, or, query, where } from "firebase/firestore";
 import { semesters, semToRank } from "@/utilities/validSem";
 import { BookText } from "lucide-react";
 import Box from "@/components/custom/Box";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 export async function generateStaticParams() {
   return semesters.map((semester) => ({
@@ -60,19 +66,7 @@ async function page({ params }) {
             {subsData &&
               subsData?.subs?.map((sub) => (
                 <React.Fragment key={sub.code}>
-                  {sub.name.includes("Elective") ? (
-                    <div
-                      className={
-                        "flex items-center gap-4 p-3 w-full h-full border border--accent"
-                      }
-                    >
-                      <BookText size={32} className="min-w-8" />
-                      <div className="flex flex-col gap-2">
-                        <span className="font-semibold">{sub.name}</span>
-                        <span className="text-sm text-slate-300">Elective</span>
-                      </div>
-                    </div>
-                  ) : (
+                  {sub.name.includes("Elective") ? undefined : (
                     <Box
                       href={`${params.sem}/${sub.name.split(" ").join("-")}`}
                     >
@@ -91,23 +85,45 @@ async function page({ params }) {
         </div>
         {electiveData && (
           <div>
-            <h2 className="text-center text-2xl font-bold my-6">
-              {electiveData.title}
-            </h2>
             <div className="grid gap-2">
-              {subsData &&
-                electiveData?.subs?.map((sub) => (
-                  <Box
-                    href={`${params.sem}/${sub.name.split(" ").join("-")}`}
-                    key={sub.code}
+              <Accordion type="single" collapsible>
+                <AccordionItem value="item-1">
+                  <AccordionTrigger
+                    className={
+                      "gap-4 p-3 w-full h-full rounded border border-accent my-2"
+                    }
                   >
-                    <BookText size={32} className="min-w-8" />
-                    <div className="flex flex-col items-start gap-2">
-                      <span className="font-semibold">{sub.name}</span>
-                      <span className="text-sm text-slate-300">{sub.code}</span>
+                    <span>
+                      <BookText size={32} className="min-w-8" />
+                    </span>
+                    <div className="flex items-start flex-col gap-2">
+                      <span className="font-semibold">
+                        {electiveData.title}
+                      </span>
+                      <span className="text-sm text-slate-300">Elective</span>
                     </div>
-                  </Box>
-                ))}
+                  </AccordionTrigger>
+                  <AccordionContent className="grid gap-2">
+                    {electiveData &&
+                      electiveData?.subs?.map((sub) => (
+                        <Box
+                          href={`${params.sem}/${sub.name
+                            .split(" ")
+                            .join("-")}`}
+                          key={sub.code}
+                        >
+                          <BookText size={32} className="min-w-8" />
+                          <div className="flex flex-col items-start gap-2">
+                            <span className="font-semibold">{sub.name}</span>
+                            <span className="text-sm text-slate-300">
+                              {sub.code}
+                            </span>
+                          </div>
+                        </Box>
+                      ))}
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
             </div>
           </div>
         )}

@@ -35,10 +35,10 @@ function SideBar() {
         <div className="flex flex-col  gap-4 mt-12">
           <Accordion type="single" collapsible>
             <AccordionItem value="item-1">
-              <AccordionTrigger>
+              <AccordionTrigger className="hover:text-slate-300">
                 <span className="text-base">Semester</span>
               </AccordionTrigger>
-              <AccordionContent>
+              <AccordionContent className="mt-4">
                 <ul className="flex flex-col gap-4">
                   {semData.map(({ name, href }, index) => (
                     <li key={index}>

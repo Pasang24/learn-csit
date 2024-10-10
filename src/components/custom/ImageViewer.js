@@ -1,6 +1,12 @@
 "use client";
 
-import { CirclePlus, CircleMinus, Download, RotateCw } from "lucide-react";
+import {
+  CirclePlus,
+  CircleMinus,
+  Download,
+  RotateCw,
+  Maximize,
+} from "lucide-react";
 import { useEffect } from "react";
 import { PhotoSlider } from "react-photo-view";
 
@@ -12,10 +18,17 @@ function ImageViewer({
   onIndexChange,
   download,
 }) {
+  const handleClose = () => {
+    onClose();
+    if (document.fullscreenElement) {
+      document.exitFullscreen();
+    }
+  };
+
   useEffect(() => {
     const handleBackButton = () => {
       if (visible) {
-        onClose();
+        handleClose();
       }
     };
 
@@ -35,45 +48,42 @@ function ImageViewer({
       }))}
       visible={visible}
       onClose={() => {
-        onClose();
+        handleClose();
         window.history.back();
       }}
       index={index}
       onIndexChange={onIndexChange}
       loadingElement={<SpinnerLoader />}
       speed={() => 300}
-      toolbarRender={({ onScale, scale, onRotate, rotate }) => {
+      toolbarRender={({ onRotate, rotate }) => {
         return (
           <>
-            <span className="PhotoView-Slider__toolbarIcon">
-              <CirclePlus
-                onClick={() => onScale(scale + 0.5)}
-                strokeWidth={2}
-                size={22}
-              />
-            </span>
-            <span className="PhotoView-Slider__toolbarIcon">
-              <CircleMinus
-                onClick={() => onScale(scale - 0.5)}
-                strokeWidth={2}
-                size={22}
-              />
-            </span>
-            <span className="PhotoView-Slider__toolbarIcon">
-              <RotateCw
-                onClick={() => onRotate(rotate + 90)}
-                strokeWidth={2}
-                size={22}
-              />
-            </span>
             <a
               href={download}
               target="_blank"
               download={true}
-              className="PhotoView-Slider__toolbarIcon mr-2"
+              className="PhotoView-Slider__toolbarIcon"
             >
               <Download strokeWidth={2} size={22} />
             </a>
+            <span
+              onClick={() => onRotate(rotate + 90)}
+              className="PhotoView-Slider__toolbarIcon"
+            >
+              <RotateCw strokeWidth={2} size={22} />
+            </span>
+            <span
+              onClick={() => {
+                if (!document.fullscreenElement) {
+                  document.documentElement.requestFullscreen();
+                } else {
+                  document.exitFullscreen();
+                }
+              }}
+              className="PhotoView-Slider__toolbarIcon mr-2"
+            >
+              <Maximize strokeWidth={2} size={22} />
+            </span>
           </>
         );
       }}

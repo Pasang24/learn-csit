@@ -26,6 +26,7 @@ export async function generateStaticParams() {
 }
 
 async function page({ params }) {
+  let notesData = [];
   const querySnapshot = await getDocs(
     query(
       collection(db, "contents"),
@@ -34,13 +35,19 @@ async function page({ params }) {
     )
   );
 
-  querySnapshot.forEach((doc) => console.log(doc.data()));
+  querySnapshot.forEach((doc) => {
+    notesData.push(doc.data());
+    console.log(doc.data());
+  });
   return (
     <div className="flex justify-center">
       <Container>
-        <h3 className="font-semibold text-xl text-center">
-          Notes Page. Under Construction!!
-        </h3>
+        {notesData.map((note) => (
+          <div>
+            <h3 className="font-semibold text-center">{`Unit ${note.unit}: ${note.title}`}</h3>
+            <p>{note.content}</p>
+          </div>
+        ))}
       </Container>
     </div>
   );
