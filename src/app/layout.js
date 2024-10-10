@@ -16,7 +16,7 @@ const geistMono = localFont({
 });
 
 export const metadata = {
-  title: "CSIT Info",
+  title: "Learn CSIT",
   description: "This website provides resources for CSIT students",
 };
 

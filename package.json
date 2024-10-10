@@ -1,5 +1,5 @@
 {
-  "name": "csit-info",
+  "name": "learn-csit",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -26,6 +26,7 @@
     "react-photo-view": "^1.2.6",
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
+    "typewriter-effect": "^2.21.0",
     "usehooks-ts": "^3.1.0"
   },
   "devDependencies": {

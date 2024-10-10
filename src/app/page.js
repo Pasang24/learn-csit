@@ -4,17 +4,18 @@ import Link from "next/link";
 import Box from "@/components/custom/Box";
 import BoxContainer from "@/components/custom/BoxContainer";
 import semData from "@/data/semData";
+import TypeWriter from "@/components/custom/TypeWriter";
 
 export default function Home() {
   return (
     <div className="">
       <header className="flex justify-center">
-        <Container className="flex items-center">
+        <Container className="flex flex-col -space-y-16 sm:space-y-0 sm:flex-row sm:items-center">
           <div className="flex flex-col items-start gap-5 flex-1">
-            <h1 className="font-extrabold text-5xl">Welcome to CSIT Info</h1>
-            <p className="font-bold text-xl">
-              One Platform for all resources related to CSIT
-            </p>
+            <h1 className="max-w-80 vs:max-w-full font-extrabold text-3xl sm:text-5xl">
+              Welcome to LearnCSIT
+            </h1>
+            <TypeWriter />
             <Link
               href={"/"}
               className="bg-white text-black px-4 py-2 rounded font-semibold "
@@ -22,14 +23,14 @@ export default function Home() {
               Get Started
             </Link>
           </div>
-          <div className="flex-1">
+          <div className="hidden vvs:inline vvs:w-60 vs:w-auto sm:w-1/2 self-end">
             <Study />
           </div>
         </Container>
       </header>
       <section className="flex justify-center mt-6">
         <Container>
-          <h2 className="font-bold text-3xl text-center mb-12">
+          <h2 className="font-bold text-xl vvs:text-2xl text-center mb-8">
             Choose any Semester and get it's resources
           </h2>
           <BoxContainer>
@@ -51,7 +52,9 @@ export default function Home() {
       </section>
       <section className="flex justify-center mt-6">
         <Container>
-          <h2 className="font-bold text-3xl mb-12">Recent Notices__</h2>
+          <h2 className="font-bold text-2xl vvs:text-3xl mb-12">
+            Recent Notices
+          </h2>
           <div className="mb-6">
             <h3 className="font-bold text-2xl text-center">Coming soon!</h3>
           </div>

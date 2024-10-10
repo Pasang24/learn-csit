@@ -9,6 +9,7 @@ module.exports = {
   theme: {
     extend: {
       screens: {
+        vvs: "375px",
         vs: "425px",
       },
       colors: {
