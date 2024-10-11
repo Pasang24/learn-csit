@@ -3,27 +3,19 @@
 import ImageViewer from "./ImageViewer";
 import { Button } from "../ui/button";
 import { BookCopy } from "lucide-react";
-import { useEffect, useState } from "react";
-import { useHash } from "@/hooks/useHash";
+import { useState } from "react";
+import useModal from "@/hooks/useModal";
 
 function ViewSyllabus({ imageUrls, downloadUrl }) {
-  const hash = useHash();
-  const [visible, setVisible] = useState(hash === "#syllabus");
+  const { isOpen, openModal, closeModal } = useModal();
   const [index, setIndex] = useState(0);
-
-  useEffect(() => {
-    setVisible(hash === "#syllabus");
-  }, [hash]);
 
   return (
     <>
       <Button
         variant="outline"
         className="self-start flex gap-2 items-center"
-        onClick={() => {
-          window.location.hash = "#syllabus";
-          setVisible(true);
-        }}
+        onClick={openModal}
       >
         <BookCopy strokeWidth={1} />
         <span>Syllabus</span>
@@ -32,10 +24,8 @@ function ViewSyllabus({ imageUrls, downloadUrl }) {
       <ImageViewer
         images={imageUrls}
         download={downloadUrl}
-        visible={visible}
-        onClose={() => {
-          setVisible(false);
-        }}
+        visible={isOpen}
+        onClose={closeModal}
         index={index}
         onIndexChange={setIndex}
       />

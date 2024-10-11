@@ -12,24 +12,19 @@ function ImageViewer({
   onIndexChange,
   download,
 }) {
-  const handleClose = () => {
-    onClose();
+  const handleFullScreenClose = () => {
     if (document.fullscreenElement) {
       document.exitFullscreen();
     }
   };
 
   useEffect(() => {
-    const handleBackButton = () => {
-      if (visible) {
-        handleClose();
-      }
-    };
-
-    window.addEventListener("popstate", handleBackButton);
+    if (visible) {
+      window.addEventListener("popstate", handleFullScreenClose);
+    }
 
     return () => {
-      window.removeEventListener("popstate", handleBackButton);
+      window.removeEventListener("popstate", handleFullScreenClose);
     };
   }, [visible]);
 
@@ -42,7 +37,8 @@ function ImageViewer({
       }))}
       visible={visible}
       onClose={() => {
-        handleClose();
+        handleFullScreenClose();
+        onClose();
         window.history.back();
       }}
       index={index}
