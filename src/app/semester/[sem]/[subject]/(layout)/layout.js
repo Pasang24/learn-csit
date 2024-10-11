@@ -4,8 +4,6 @@ import { db, storage } from "@/app/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
 import { notFound } from "next/navigation";
 import { getDownloadURL, listAll, ref } from "firebase/storage";
-import { ArrowDownToLine } from "lucide-react";
-import { buttonVariants } from "@/components/ui/button";
 import SubjectNavBar from "@/components/custom/SubjectNavBar";
 
 async function layout({ params, children }) {
@@ -40,31 +38,33 @@ async function layout({ params, children }) {
 
   return (
     <>
-      <div className="flex justify-center">
-        <Container>
-          <div className="flex flex-col gap-3">
-            <h2 className="font-bold text-xl">
-              {subData.title} ({subData.code})
-            </h2>
-            <div>
-              <h3 className="font-semibold mb-1">Course Description:</h3>
-              <p className="text-sm">{subData.desc}</p>
+      {"unit" in params ? undefined : (
+        <div className="flex justify-center">
+          <Container>
+            <div className="flex flex-col gap-3">
+              <h2 className="font-bold text-xl">
+                {subData.title} ({subData.code})
+              </h2>
+              <div>
+                <h3 className="font-semibold mb-1">Course Description:</h3>
+                <p className="text-sm">{subData.desc}</p>
+              </div>
+              <div>
+                <h3 className="font-semibold mb-1">Course Objective:</h3>
+                <p className="text-sm">{subData.obj}</p>
+              </div>
+              <div className="self-start flex items-center gap-2">
+                <ViewSyllabus
+                  imageUrls={syllabusImageUrls}
+                  downloadUrl={syllabusDownloadUrl}
+                />
+              </div>
+              <hr className="my-2" />
+              <SubjectNavBar />
             </div>
-            <div>
-              <h3 className="font-semibold mb-1">Course Objective:</h3>
-              <p className="text-sm">{subData.obj}</p>
-            </div>
-            <div className="self-start flex items-center gap-2">
-              <ViewSyllabus
-                imageUrls={syllabusImageUrls}
-                downloadUrl={syllabusDownloadUrl}
-              />
-            </div>
-            <hr className="my-2" />
-            <SubjectNavBar />
-          </div>
-        </Container>
-      </div>
+          </Container>
+        </div>
+      )}
       {children}
     </>
   );

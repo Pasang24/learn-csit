@@ -2,6 +2,7 @@ import Container from "@/components/custom/Container";
 import { db } from "@/app/firebaseConfig";
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
 import { rankToSem } from "@/utilities/rankToSem";
+import Link from "next/link";
 
 export async function generateStaticParams() {
   let courseData = [];
@@ -42,8 +43,9 @@ async function page({ params }) {
     <div className="flex justify-center">
       <Container className={"grid gap-2"}>
         {notesData.map((note) => (
-          <div
-            className="flex items-center gap-3 border border-accent p-3 rounded overflow-hidden hover:bg-accent select-none cursor-pointer"
+          <Link
+            href={`${`/semester/${params.sem}/${params.subject}/${note.unit}`}`}
+            className="flex items-center gap-3 border border-accent p-3 rounded overflow-hidden hover:bg-accent select-none"
             style={{ transition: "0.2s all ease" }}
             key={note.unit}
           >
@@ -56,7 +58,7 @@ async function page({ params }) {
                 {note.content}
               </p>
             </div>
-          </div>
+          </Link>
         ))}
       </Container>
     </div>
