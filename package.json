@@ -27,7 +27,8 @@
     "tailwind-merge": "^2.5.2",
     "tailwindcss-animate": "^1.0.7",
     "typewriter-effect": "^2.21.0",
-    "usehooks-ts": "^3.1.0"
+    "usehooks-ts": "^3.1.0",
+    "vaul": "^1.0.0"
   },
   "devDependencies": {
     "postcss": "^8",

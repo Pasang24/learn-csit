@@ -1,10 +1,19 @@
+"use client";
+
 import Logo from "./Logo";
 import Container from "./Container";
 import Link from "next/link";
 import semData from "@/data/semData";
+import { usePathname } from "next/navigation";
 
 function Footer() {
-  return (
+  const pathname = usePathname();
+
+  // Check if the pathname has a unit number
+  let unit = Number(pathname.split("/")[4]);
+
+  // If the unit is not a number, render the footer
+  return isNaN(unit) ? (
     <footer className="flex justify-center border-t border-accent mt-6">
       <Container className="flex flex-col gap-6">
         <div className="flex flex-wrap gap-10 w-full">
@@ -54,7 +63,7 @@ function Footer() {
         </span>
       </Container>
     </footer>
-  );
+  ) : null;
 }
 
 export default Footer;

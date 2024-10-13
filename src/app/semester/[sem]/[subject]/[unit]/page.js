@@ -1,5 +1,6 @@
 import ChapterList from "@/components/custom/ChapterList";
 import Container from "@/components/custom/Container";
+import NotesButton from "@/components/custom/NotesButton";
 import NotesList from "@/components/custom/NotesList";
 
 function page({ params }) {
@@ -12,6 +13,7 @@ function page({ params }) {
           <NotesList />
         </div>
       </Container>
+      <NotesButton />
     </div>
   );
 }
