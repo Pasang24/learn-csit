@@ -11,11 +11,25 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { LayoutList } from "lucide-react";
-import Link from "next/link";
+import useModal from "@/hooks/useModal";
+import { Button } from "../ui/button";
+import { useRouter } from "next/navigation";
 
 function NotesDrawer() {
+  const { isOpen, openModal, closeModal } = useModal();
+  const router = useRouter();
   return (
-    <Drawer>
+    <Drawer
+      open={isOpen}
+      onOpenChange={() => {
+        if (isOpen) {
+          closeModal();
+          window.history.back();
+        } else {
+          openModal();
+        }
+      }}
+    >
       <DrawerTrigger asChild>
         <LayoutList />
       </DrawerTrigger>
@@ -25,36 +39,41 @@ function NotesDrawer() {
           <DrawerDescription>Select a Chapter</DrawerDescription>
         </DrawerHeader>
         <DrawerFooter className="max-h-[calc(100vh-106px)] overflow-y-scroll">
-          <Link
-            href={"/"}
-            className="font-medium text-slate-300 border border-y-2 p-4 rounded"
+          <Button
+            onClick={() => router.replace("/")}
+            variant="outline"
+            className="text-slate-300 justify-start p-6"
           >
             Introduction to Computer
-          </Link>
-          <Link
-            href={"/"}
-            className="font-medium text-slate-300 border border-y-2 p-4 rounded"
+          </Button>
+          <Button
+            onClick={() => router.replace("/")}
+            variant="outline"
+            className="text-slate-300 justify-start p-6"
           >
             The Computer System Hardware
-          </Link>
-          <Link
-            href={"/"}
-            className="font-medium text-slate-300 border border-y-2 p-4 rounded"
+          </Button>
+          <Button
+            onClick={() => router.replace("/")}
+            variant="outline"
+            className="text-slate-300 justify-start p-6"
           >
             Computer Memory
-          </Link>
-          <Link
-            href={"/"}
-            className="font-medium text-slate-300 border border-y-2 p-4 rounded"
+          </Button>
+          <Button
+            onClick={() => router.replace("/")}
+            variant="outline"
+            className="text-slate-300 justify-start p-6"
           >
             Input and Output Devices
-          </Link>
-          <Link
-            href={"/"}
-            className="font-medium text-slate-300 border border-y-2 p-4 rounded"
+          </Button>
+          <Button
+            onClick={() => router.replace("/")}
+            variant="outline"
+            className="text-slate-300 justify-start p-6"
           >
             Data Representation
-          </Link>
+          </Button>
         </DrawerFooter>
       </DrawerContent>
     </Drawer>
