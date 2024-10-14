@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 
-function ChapterList() {
+function ChapterList({ chapters, currentChapter }) {
   const listRef = useRef(null);
   const listTopRef = useRef(0);
   const [isSticky, setIsSticky] = useState(false);
@@ -43,21 +43,16 @@ function ChapterList() {
       }`}
     >
       <h3 className="font-semibold">Chapters</h3>
-      <Link href={"/"} className="font-medium text-slate-300 hover:underline">
-        Introduction to Computer
-      </Link>
-      <Link href={"/"} className="font-medium text-slate-300 hover:underline">
-        The Computer System Hardware
-      </Link>
-      <Link href={"/"} className="font-medium text-slate-300 hover:underline">
-        Computer Memory
-      </Link>
-      <Link href={"/"} className="font-medium text-slate-300 hover:underline">
-        Input and Output Devices
-      </Link>
-      <Link href={"/"} className="font-medium text-slate-300 hover:underline">
-        Data Representation
-      </Link>
+      {chapters.map((chapter) => (
+        <Link
+          href={`${chapter.unit}`}
+          className={`font-medium text-slate-300 hover:underline ${
+            chapter.unit === currentChapter ? "underline" : ""
+          }`}
+        >
+          {chapter.title}
+        </Link>
+      ))}
     </div>
   );
 }
