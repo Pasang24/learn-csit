@@ -1,33 +1,48 @@
 import { Menu } from "lucide-react";
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetTrigger,
-} from "@/components/ui/sheet";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import Link from "next/link";
+import useModal from "@/hooks/useModal";
+import { Button } from "../ui/button";
+import { useRouter } from "next/navigation";
 
 import semData from "@/data/semData";
 
-const SideLink = ({ title, href }) => {
-  return (
-    <SheetClose asChild>
-      <Link href={href} className={`hover:text-slate-400 text-base`}>
-        {title}
-      </Link>
-    </SheetClose>
-  );
-};
-
 function SideBar() {
+  const { isOpen, openModal, closeModal } = useModal();
+  const router = useRouter();
+
+  const SideLink = ({ title, href }) => {
+    return (
+      <Button
+        onClick={() => {
+          closeModal();
+          router.replace(href);
+        }}
+        variant="primary"
+        className={`justify-start px-0 hover:text-slate-400 text-base`}
+      >
+        {title}
+      </Button>
+    );
+  };
+
   return (
-    <Sheet>
+    <Sheet
+      open={isOpen}
+      onOpenChange={() => {
+        if (isOpen) {
+          closeModal();
+          router.back();
+        } else {
+          openModal();
+        }
+      }}
+    >
       <SheetTrigger>
         <Menu size={30} />
       </SheetTrigger>
