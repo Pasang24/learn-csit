@@ -2,7 +2,6 @@
 
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerDescription,
   DrawerFooter,
@@ -34,20 +33,28 @@ function NotesDrawer() {
         <LayoutList />
       </DrawerTrigger>
       <DrawerContent>
-        <DrawerHeader>
+        <DrawerHeader className="sm:text-center">
           <DrawerTitle>Chapters</DrawerTitle>
           <DrawerDescription>Select a Chapter</DrawerDescription>
         </DrawerHeader>
         <DrawerFooter className="max-h-[calc(100vh-106px)] overflow-y-scroll">
           <Button
-            onClick={() => router.replace("/")}
+            onClick={() =>
+              router.replace(
+                "/semester/first/Introduction-to-Information-Technology/1"
+              )
+            }
             variant="outline"
             className="text-slate-300 justify-start p-6"
           >
             Introduction to Computer
           </Button>
           <Button
-            onClick={() => router.replace("/")}
+            onClick={() =>
+              router.replace(
+                "/semester/first/Introduction-to-Information-Technology/2"
+              )
+            }
             variant="outline"
             className="text-slate-300 justify-start p-6"
           >

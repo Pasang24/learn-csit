@@ -38,7 +38,7 @@ function ChapterList() {
     <div
       ref={listRef}
       id="chapterList"
-      className={`hidden sm:flex flex-col gap-3 border-r border-accent w-56 min-h-fit max-h-[calc(100vh-109px)] overflow-y-scroll ${
+      className={`hidden md:flex flex-col gap-3 border-r border-accent w-56 min-h-fit max-h-[calc(100vh-109px)] overflow-y-scroll ${
         isSticky ? "fixed top-3" : "absolute"
       }`}
     >
