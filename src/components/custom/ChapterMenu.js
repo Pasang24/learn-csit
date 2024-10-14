@@ -1,7 +1,7 @@
 "use client";
 
-import NotesButton from "./NotesButton";
 import ChapterList from "./ChapterList";
+import NotesDrawer from "./NotesDrawer";
 import { useMediaQuery } from "usehooks-ts";
 
 function ChapterMenu() {
@@ -10,7 +10,7 @@ function ChapterMenu() {
   });
 
   if (isDesktopOrLaptop) return <ChapterList />;
-  return <NotesButton />;
+  return <NotesDrawer />;
 }
 
 export default ChapterMenu;

@@ -30,7 +30,9 @@ function NotesDrawer() {
       }}
     >
       <DrawerTrigger asChild>
-        <LayoutList />
+        <button className="fixed bottom-6 right-6 bg-[#1d1d22] w-16 h-16 grid place-items-center rounded-full p-4 border shadow-md shadow-black md:hidden">
+          <LayoutList />
+        </button>
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="sm:text-center">
