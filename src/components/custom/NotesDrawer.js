@@ -47,6 +47,7 @@ function NotesDrawer({ chapters, currentChapter }) {
               className={`text-slate-300 justify-start p-6 ${
                 chapter.unit === currentChapter ? "bg-accent" : ""
               }`}
+              key={chapter.title}
             >
               {chapter.title}
             </Button>

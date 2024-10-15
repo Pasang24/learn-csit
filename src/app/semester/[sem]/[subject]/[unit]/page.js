@@ -4,6 +4,50 @@ import NotesList from "@/components/custom/NotesList";
 import { db } from "@/app/firebaseConfig";
 import { getDocs, query, collection, where, orderBy } from "firebase/firestore";
 import { notFound } from "next/navigation";
+import { rankToSem } from "@/utilities/rankToSem";
+
+export async function generateStaticParams() {
+  let courseData = [];
+
+  const querySnapshot = await getDocs(collection(db, "semesters"));
+  querySnapshot.forEach((doc) => {
+    courseData.push(doc.data());
+  });
+
+  let paramsData = [];
+
+  for (let course of courseData) {
+    let sem = rankToSem(course.rank);
+    let subjectData = [];
+
+    for (let sub of course.subs) {
+      let subject = sub.name.split(" ").join("-");
+      let notesData = [];
+      const querySnapshot = await getDocs(
+        query(
+          collection(db, "contents"),
+          where("subjectId", "==", subject),
+          orderBy("unit")
+        )
+      );
+
+      querySnapshot.forEach((doc) => {
+        notesData.push(doc.data());
+      });
+
+      notesData.forEach((note) => {
+        subjectData.push({
+          sem,
+          subject,
+          unit: note.unit.toString(),
+        });
+      });
+    }
+    paramsData = [...paramsData, ...subjectData];
+  }
+
+  return paramsData;
+}
 
 async function page({ params }) {
   let notesData = [];
