@@ -14,10 +14,11 @@ function QuestionContainer({ yearData, unitData }) {
   return (
     <div className="flex justify-center">
       <Container>
-        <div className="flex justify-between mb-6">
-          <div className="flex items-center gap-4">
+        <div className="flex flex-col gap-4 items-stretch vs:flex-row vs:gap-0 justify-between mb-6">
+          <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-4">
             <h4 className="text-sm font-semibold">Filter By:</h4>
             <SelectMenu
+              className={"w-full vs:w-[180px]"}
               items={[
                 { name: "Year", value: "Year" },
                 { name: "Unit", value: "Unit" },
@@ -27,18 +28,20 @@ function QuestionContainer({ yearData, unitData }) {
             />
           </div>
           {isYear ? (
-            <div className="flex items-center gap-4">
+            <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-4">
               <h4 className="text-sm font-semibold">Select Year:</h4>
               <SelectMenu
+                className={"w-full vs:w-[180px]"}
                 items={yearData}
                 defaultValue={year}
                 onChange={(value) => setYear(value)}
               />
             </div>
           ) : (
-            <div className="flex items-center gap-4">
+            <div className="flex iflex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-4">
               <h4 className="text-sm font-semibold">Select Unit:</h4>
               <SelectMenu
+                className={"w-full vs:w-[180px]"}
                 items={unitData}
                 defaultValue={unit}
                 onChange={(value) => setUnit(value)}

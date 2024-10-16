@@ -1,8 +1,8 @@
 import Link from "next/link";
 
-function Logo() {
+function Logo({ className }) {
   return (
-    <Link href={"/"} className="font-bold text-2xl">
+    <Link href={"/"} className={`font-bold text-2xl ${className}`}>
       LearnCSIT
     </Link>
   );

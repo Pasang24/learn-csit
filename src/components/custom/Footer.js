@@ -18,7 +18,7 @@ function Footer() {
       <Container className="flex flex-col gap-6">
         <div className="flex flex-wrap gap-10 w-full">
           <div className="flex flex-col gap-3 w-full sm:w-1/2">
-            <Logo />
+            <Logo className={"self-start"} />
             <p>
               CSIT Info is a website that provides a complete set of reference
               materials like notes, syllabus, question banks, solutions, and

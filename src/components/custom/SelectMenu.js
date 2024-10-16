@@ -6,10 +6,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-function SelectMenu({ items, defaultValue, onChange }) {
+function SelectMenu({ items, defaultValue, onChange, className }) {
   return (
     <Select onValueChange={onChange} value={defaultValue}>
-      <SelectTrigger className="w-[180px]">
+      <SelectTrigger className={`${className}`}>
         <SelectValue />
       </SelectTrigger>
       <SelectContent>
