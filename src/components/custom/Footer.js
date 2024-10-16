@@ -59,7 +59,7 @@ function Footer() {
         </div>
         <hr />
         <span className="self-center text-center">
-          © 2024-2026 . CSIT Info . All Rights Reserved
+          © 2024-2026 . LearnCSIT . All Rights Reserved
         </span>
       </Container>
     </footer>

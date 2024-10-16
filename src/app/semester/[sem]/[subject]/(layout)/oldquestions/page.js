@@ -1,14 +1,50 @@
-import Container from "@/components/custom/Container";
+import QuestionContainer from "@/components/custom/QuestionContainer";
+import {
+  and,
+  collection,
+  getDocs,
+  orderBy,
+  query,
+  where,
+} from "firebase/firestore";
+import { db } from "@/app/firebaseConfig";
 
 async function page({ params }) {
+  let questionsUnit = [];
+  let questionsYear = [];
+
+  const questionsUnitQuery = query(
+    collection(db, "contents"),
+    where("subjectId", "==", params.subject),
+    orderBy("unit")
+  );
+  const questionsYearQuery = query(
+    collection(db, "questions"),
+    and(where("subjectId", "==", params.subject), where("qNum", "==", 4)),
+    orderBy("year")
+  );
+  const [questionUnitSnapshot, questionsYearSnapshot] = await Promise.all([
+    await getDocs(questionsUnitQuery),
+    await getDocs(questionsYearQuery),
+  ]);
+
+  questionUnitSnapshot.forEach((doc) => {
+    let unit = doc.get("unit");
+    questionsUnit.push({ name: `Unit ${unit}`, value: unit });
+  });
+  questionsYearSnapshot.forEach((doc) => {
+    let year = doc.get("year");
+    questionsYear.push({ name: `${year}`, value: year });
+  });
+
+  // this line checks if we don't have past questions and modifies the arrays accordingly
+  if (questionsUnit.length === 0 || questionsYear.length === 0) {
+    questionsUnit = [{ name: "Not Available", value: 404 }];
+    questionsYear = [{ name: "Not Available", value: 404 }];
+  }
+  console.log(questionsUnit, questionsYear);
   return (
-    <div className="flex justify-center">
-      <Container>
-        <h3 className="font-semibold text-xl text-center">
-          Past Questions Page. Under Construction!!
-        </h3>
-      </Container>
-    </div>
+    <QuestionContainer unitData={questionsUnit} yearData={questionsYear} />
   );
 }
 
