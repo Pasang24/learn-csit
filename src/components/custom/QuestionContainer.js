@@ -38,7 +38,7 @@ function QuestionContainer({ yearData, unitData }) {
               />
             </div>
           ) : (
-            <div className="flex iflex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-4">
+            <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-4">
               <h4 className="text-sm font-semibold">Select Unit:</h4>
               <SelectMenu
                 className={"w-full vs:w-[180px]"}
