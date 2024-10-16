@@ -8,6 +8,7 @@ import {
   where,
 } from "firebase/firestore";
 import { db } from "@/app/firebaseConfig";
+import { fetchQuestions } from "@/app/actions/fetchQuestions";
 
 async function page({ params }) {
   let questionsUnit = [];
@@ -20,7 +21,7 @@ async function page({ params }) {
   );
   const questionsYearQuery = query(
     collection(db, "questions"),
-    and(where("subjectId", "==", params.subject), where("qNum", "==", 4)),
+    and(where("subjectId", "==", params.subject), where("qNum", "==", 1)),
     orderBy("year")
   );
   const [questionUnitSnapshot, questionsYearSnapshot] = await Promise.all([
@@ -42,9 +43,12 @@ async function page({ params }) {
     questionsUnit = [{ name: "Not Available", value: 404 }];
     questionsYear = [{ name: "Not Available", value: 404 }];
   }
-  console.log(questionsUnit, questionsYear);
   return (
-    <QuestionContainer unitData={questionsUnit} yearData={questionsYear} />
+    <QuestionContainer
+      unitData={questionsUnit}
+      yearData={questionsYear}
+      fetchQuestions={fetchQuestions}
+    />
   );
 }
 
