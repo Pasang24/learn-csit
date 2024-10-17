@@ -19,7 +19,10 @@ export async function fetchQuestions(subject, isYear, year, unit) {
       )
     : query(
         collection(db, "questions"),
-        and(where("subjectId", "==", subject), where("unit", "==", unit)),
+        and(
+          where("subjectId", "==", subject),
+          where("unit", "array-contains", unit)
+        ),
         orderBy("year")
       );
 

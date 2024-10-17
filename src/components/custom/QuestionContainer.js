@@ -2,8 +2,11 @@
 
 import Container from "./Container";
 import SelectMenu from "./SelectMenu";
+import SpinnerLoader from "../loaders/SpinnerLoader";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
+import YearlyQuestionList from "./YearlyQuestionList";
+import { MathJaxContext } from "better-react-mathjax";
 
 function QuestionContainer({ yearData, unitData, fetchQuestions }) {
   const [filter, setFilter] = useState("Year");
@@ -29,7 +32,7 @@ function QuestionContainer({ yearData, unitData, fetchQuestions }) {
 
   return (
     <div className="flex justify-center">
-      <Container>
+      <Container className="flex flex-col">
         <div className="flex flex-col gap-4 items-stretch vs:flex-row vs:gap-0 justify-between mb-6">
           <SelectMenuContainer
             title={"Filter By:"}
@@ -57,16 +60,15 @@ function QuestionContainer({ yearData, unitData, fetchQuestions }) {
             />
           )}
         </div>
-        <div className="flex flex-col gap-4">
-          <h3 className="text-center text-2xl font-semibold mt-12">
-            Under Construction!!
-          </h3>
-          {questions.map((question, index) => (
-            <div key={question.title}>
-              {index + 1}. {question.title}
-            </div>
-          ))}
-        </div>
+        {!loading && (
+          <div className="self-center max-w-4xl sm:border sm:rounded sm:p-3">
+            <MathJaxContext>
+              {isYear ? (
+                <YearlyQuestionList year={year} questions={questions} />
+              ) : null}
+            </MathJaxContext>
+          </div>
+        )}
       </Container>
     </div>
   );
