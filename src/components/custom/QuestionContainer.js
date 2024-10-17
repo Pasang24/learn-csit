@@ -33,7 +33,7 @@ function QuestionContainer({ yearData, unitData, fetchQuestions }) {
   return (
     <div className="flex justify-center">
       <Container className="flex flex-col">
-        <div className="flex flex-col gap-4 items-stretch vs:flex-row vs:gap-0 justify-between mb-6">
+        <div className="flex flex-col gap-2 items-stretch vvvs:flex-row vvvs:gap-0 justify-between mb-6">
           <SelectMenuContainer
             title={"Filter By:"}
             items={[
@@ -79,7 +79,7 @@ const SelectMenuContainer = ({ title, items, defaultValue, onChange }) => {
     <div className="flex flex-col items-start gap-2 sm:flex-row sm:items-center sm:gap-4">
       <h4 className="text-sm font-semibold">{title}</h4>
       <SelectMenu
-        className={"w-full vs:w-[180px]"}
+        className={"w-full vvvs:w-[140px] vvs:w-[160px] vs:w-[180px]"}
         items={items}
         defaultValue={defaultValue}
         onChange={onChange}
