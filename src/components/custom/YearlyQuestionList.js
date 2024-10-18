@@ -1,6 +1,6 @@
+import parse from "html-react-parser";
 import { MathJax } from "better-react-mathjax";
 import { convertToWords } from "react-number-to-words";
-import parse from "html-react-parser";
 
 function YearlyQuestionList({ questions, year }) {
   const longQuestions = questions.filter(
@@ -11,6 +11,7 @@ function YearlyQuestionList({ questions, year }) {
   );
   const attemptLong = convertToWords(longQuestions.length - 1);
   const attemptShort = convertToWords(shortQuestions.length - 1);
+
   return (
     <div>
       <div className="flex flex-col gap-1 justify-center font-semibold">
@@ -24,11 +25,11 @@ function YearlyQuestionList({ questions, year }) {
         <h3 className="font-semibold">
           Attempt any {attemptLong?.toUpperCase()} questions
         </h3>
-        {longQuestions.map((question) => (
-          <div className="flex items-center gap-3" key={question.unit}>
-            <div>{question.qNum}</div>
-            <MathJax>
-              <div>{parse(question.title)}</div>
+        {longQuestions.map((question, index) => (
+          <div className="flex items-center gap-3" key={index}>
+            <div>{question.qNum}.</div>
+            <MathJax hideUntilTypeset={"first"} inline dynamic>
+              <div>{parse(question?.title)}</div>
             </MathJax>
           </div>
         ))}
@@ -38,10 +39,10 @@ function YearlyQuestionList({ questions, year }) {
         <h3 className="font-semibold">
           Attempt any {attemptShort?.toUpperCase()} questions
         </h3>
-        {shortQuestions.map((question) => (
-          <div className="flex items-center gap-3" key={question.unit}>
+        {shortQuestions.map((question, index) => (
+          <div className="flex items-center gap-3" key={index}>
             <div>{question.qNum}.</div>
-            <MathJax>
+            <MathJax hideUntilTypeset={"first"} inline dynamic>
               <div>{parse(question.title)}</div>
             </MathJax>
           </div>

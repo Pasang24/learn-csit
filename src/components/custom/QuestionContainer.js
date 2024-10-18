@@ -16,7 +16,6 @@ function QuestionContainer({ yearData, unitData, fetchQuestions }) {
   const [questions, setQuestions] = useState([]);
 
   const params = useParams();
-
   const isYear = filter === "Year";
 
   useEffect(() => {
@@ -31,46 +30,50 @@ function QuestionContainer({ yearData, unitData, fetchQuestions }) {
   }, [filter, year, unit]);
 
   return (
-    <div className="flex justify-center">
-      <Container className="flex flex-col">
-        <div className="flex flex-col gap-2 items-stretch vvvs:flex-row vvvs:gap-0 justify-between mb-6">
-          <SelectMenuContainer
-            title={"Filter By:"}
-            items={[
-              { name: "Year", value: "Year" },
-              { name: "Unit", value: "Unit" },
-            ]}
-            defaultValue={filter}
-            onChange={(value) => setFilter(value)}
-          />
+    <MathJaxContext
+      version={2}
+      onStartup={(mathJax) => (mathJax.Hub.processSectionDelay = 0)}
+      config={{ showMathMenu: false }}
+    >
+      <div className="flex justify-center">
+        <Container className="flex flex-col">
+          <div className="flex flex-col gap-2 items-stretch vvvs:flex-row vvvs:gap-0 justify-between mb-6">
+            <SelectMenuContainer
+              title={"Filter By:"}
+              items={[
+                { name: "Year", value: "Year" },
+                { name: "Unit", value: "Unit" },
+              ]}
+              defaultValue={filter}
+              onChange={(value) => setFilter(value)}
+            />
 
-          {isYear ? (
-            <SelectMenuContainer
-              title={"Select Year:"}
-              items={yearData}
-              defaultValue={year}
-              onChange={(value) => setYear(value)}
-            />
-          ) : (
-            <SelectMenuContainer
-              title={"Select Unit:"}
-              items={unitData}
-              defaultValue={unit}
-              onChange={(value) => setUnit(value)}
-            />
-          )}
-        </div>
-        {!loading && (
-          <div className="self-center max-w-4xl sm:border sm:rounded sm:p-3">
-            <MathJaxContext>
-              {isYear ? (
-                <YearlyQuestionList year={year} questions={questions} />
-              ) : null}
-            </MathJaxContext>
+            {isYear ? (
+              <SelectMenuContainer
+                title={"Select Year:"}
+                items={yearData}
+                defaultValue={year}
+                onChange={(value) => setYear(value)}
+              />
+            ) : (
+              <SelectMenuContainer
+                title={"Select Unit:"}
+                items={unitData}
+                defaultValue={unit}
+                onChange={(value) => setUnit(value)}
+              />
+            )}
           </div>
-        )}
-      </Container>
-    </div>
+          {!loading && (
+            <div className="self-center max-w-4xl sm:border sm:rounded sm:p-3">
+              {isYear && (
+                <YearlyQuestionList year={year} questions={questions} />
+              )}
+            </div>
+          )}
+        </Container>
+      </div>
+    </MathJaxContext>
   );
 }
 
