@@ -26,8 +26,8 @@ function YearlyQuestionList({ questions, year }) {
           Attempt any {attemptLong?.toUpperCase()} questions
         </h3>
         {longQuestions.map((question, index) => (
-          <div className="flex items-center gap-3" key={index}>
-            <div>{question.qNum}.</div>
+          <div className="flex items-start gap-3" key={index}>
+            <div className="font-semibold">{question.qNum}.</div>
             <MathJax hideUntilTypeset={"first"} inline dynamic>
               <div>{parse(question?.title)}</div>
             </MathJax>
@@ -40,8 +40,8 @@ function YearlyQuestionList({ questions, year }) {
           Attempt any {attemptShort?.toUpperCase()} questions
         </h3>
         {shortQuestions.map((question, index) => (
-          <div className="flex items-center gap-3" key={index}>
-            <div>{question.qNum}.</div>
+          <div className="flex items-start gap-3" key={index}>
+            <div className="font-semibold">{question.qNum}.</div>
             <MathJax hideUntilTypeset={"first"} inline dynamic>
               <div>{parse(question.title)}</div>
             </MathJax>
