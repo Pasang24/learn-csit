@@ -33,7 +33,7 @@ function QuestionContainer({ yearData, unitData, fetchQuestions }) {
     <MathJaxContext
       version={2}
       onStartup={(mathJax) => (mathJax.Hub.processSectionDelay = 0)}
-      config={{ showMathMenu: false }}
+      config={{ showMathMenu: false, messageStyle: "none" }}
     >
       <div className="flex justify-center">
         <Container className="flex flex-col">
