@@ -4,16 +4,20 @@ import Logo from "./Logo";
 import Container from "./Container";
 import Link from "next/link";
 import semData from "@/data/semData";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 
 function Footer() {
   const pathname = usePathname();
+  const params = useParams();
 
-  // Check if the pathname has a unit number
-  let unit = Number(pathname.split("/")[4]);
+  // Check if the params has unit or year
+  let unit = params?.unit;
+  let year = params?.year;
 
-  // If the unit is not a number, render the footer
-  return isNaN(unit) ? (
+  let hasUnitOrYear = unit || year;
+
+  // If there is unit or year, don't render the footer
+  return !hasUnitOrYear ? (
     <footer className="flex justify-center border-t border-accent mt-6">
       <Container className="flex flex-col gap-6">
         <div className="flex flex-wrap gap-10 w-full">
