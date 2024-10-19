@@ -1,4 +1,3 @@
-import QuestionContainer from "@/components/custom/QuestionContainer";
 import {
   and,
   collection,
@@ -8,7 +7,9 @@ import {
   where,
 } from "firebase/firestore";
 import { db } from "@/app/firebaseConfig";
-import { fetchQuestions } from "@/app/actions/fetchQuestions";
+import { BookOpenText } from "lucide-react";
+import Container from "@/components/custom/Container";
+import Link from "next/link";
 
 async function page({ params }) {
   let questionsUnit = [];
@@ -40,15 +41,25 @@ async function page({ params }) {
 
   // this line checks if we don't have past questions and modifies the arrays accordingly
   if (questionsUnit.length === 0 || questionsYear.length === 0) {
-    questionsUnit = [{ name: "Not Available", value: 404 }];
-    questionsYear = [{ name: "Not Available", value: 404 }];
+    questionsUnit = [{ name: "Not Available", value: "404" }];
+    questionsYear = [{ name: "Not Available", value: "404" }];
   }
   return (
-    <QuestionContainer
-      unitData={questionsUnit}
-      yearData={questionsYear}
-      fetchQuestions={fetchQuestions}
-    />
+    <div className="flex justify-center">
+      <Container className={"grid gap-2"}>
+        {questionsYear.map((question) => (
+          <Link
+            href={`${`/semester/${params.sem}/${params.subject}/oldquestions/${question.value}`}`}
+            className="flex items-center gap-3 border border-accent p-3 rounded overflow-hidden hover:bg-accent select-none"
+            style={{ transition: "0.2s all ease" }}
+            key={question.value}
+          >
+            <BookOpenText size={32} className="min-w-8" />
+            <h3 className="font-semibold mb-2 sm:text-lg">{`Question Paper ${question.name}`}</h3>
+          </Link>
+        ))}
+      </Container>
+    </div>
   );
 }
 
