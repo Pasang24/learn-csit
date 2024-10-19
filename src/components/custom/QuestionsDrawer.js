@@ -12,10 +12,10 @@ import {
 import { LayoutList } from "lucide-react";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
 import useModal from "@/hooks/useModal";
+import { useEffect, useState } from "react";
 
-function NotesDrawer({ chapters, currentChapter }) {
+function QuestionsDrawer({ years, currentYear }) {
   const { isOpen, openModal, closeModal } = useModal();
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -54,7 +54,7 @@ function NotesDrawer({ chapters, currentChapter }) {
     >
       <DrawerTrigger asChild>
         <button
-          className={`fixed bottom-6 right-6 bg-[#1d1d22] w-16 h-16 grid place-items-center rounded-full p-4 border shadow-md shadow-black md:hidden transition-transform duration-300 ease-in-out ${
+          className={`fixed z-10 bottom-6 right-6 bg-[#1d1d22] w-16 h-16 grid place-items-center rounded-full p-4 border shadow-md shadow-black md:hidden transition-transform duration-300 ease-in-out ${
             isVisible ? "translate-y-0" : "translate-y-24"
           }`}
         >
@@ -63,20 +63,20 @@ function NotesDrawer({ chapters, currentChapter }) {
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="sm:text-center">
-          <DrawerTitle>Chapters</DrawerTitle>
-          <DrawerDescription>Select a Chapter</DrawerDescription>
+          <DrawerTitle>Question Banks</DrawerTitle>
+          <DrawerDescription>Select a Question Bank</DrawerDescription>
         </DrawerHeader>
         <DrawerFooter className="max-h-[calc(100vh-106px)] overflow-y-scroll">
-          {chapters.map((chapter) => (
+          {years.map((item) => (
             <Button
-              onClick={() => router.replace(`${chapter.unit}`)}
+              onClick={() => router.replace(`${item.value}`)}
               variant="outline"
               className={`text-slate-300 justify-start p-6 ${
-                chapter.unit === currentChapter ? "bg-accent" : ""
+                item.value === currentYear ? "bg-accent" : ""
               }`}
-              key={chapter.title}
+              key={item.value}
             >
-              {chapter.title}
+              {item.name}
             </Button>
           ))}
         </DrawerFooter>
@@ -85,4 +85,4 @@ function NotesDrawer({ chapters, currentChapter }) {
   );
 }
 
-export default NotesDrawer;
+export default QuestionsDrawer;

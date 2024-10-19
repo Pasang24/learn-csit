@@ -20,7 +20,7 @@ function QuestionContainer({ questions, year }) {
       onStartup={(mathJax) => (mathJax.Hub.processSectionDelay = 0)}
       config={{ showMathMenu: false, messageStyle: "none" }}
     >
-      <div className="border p-4 rounded">
+      <div className="sm:border sm:p-4 rounded">
         <div className="flex flex-col gap-1 justify-center font-semibold">
           <h3 className="text-center">Tribhuwan University</h3>
           <h3 className="text-center">Institute of Science and Technology</h3>
@@ -33,7 +33,7 @@ function QuestionContainer({ questions, year }) {
             Attempt any {attemptLong?.toUpperCase()} questions
           </h3>
           {longQuestions.map((question, index) => (
-            <div className="flex items-start gap-3" key={index}>
+            <div className="flex items-start gap-1 vs:gap-3" key={index}>
               <div className="font-semibold">{question.qNum}.</div>
               <MathJax hideUntilTypeset={"first"} inline dynamic>
                 <div>{parse(question?.title)}</div>
@@ -47,7 +47,7 @@ function QuestionContainer({ questions, year }) {
             Attempt any {attemptShort?.toUpperCase()} questions
           </h3>
           {shortQuestions.map((question, index) => (
-            <div className="flex items-start gap-3" key={index}>
+            <div className="flex items-start gap-1 vs:gap-3" key={index}>
               <div className="font-semibold">{question.qNum}.</div>
               <MathJax hideUntilTypeset={"first"} inline dynamic>
                 <div>{parse(question.title)}</div>
