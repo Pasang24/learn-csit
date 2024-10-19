@@ -53,13 +53,13 @@ function QuestionsDrawer({ years, currentYear }) {
       }}
     >
       <DrawerTrigger asChild>
-        <button
-          className={`fixed z-10 bottom-6 right-6 bg-[#1d1d22] w-16 h-16 grid place-items-center rounded-full p-4 border shadow-md shadow-black md:hidden transition-transform duration-300 ease-in-out ${
-            isVisible ? "translate-y-0" : "translate-y-24"
+        <Button
+          className={`fixed z-10 bottom-6 right-6 bg-white w-14 h-14 flex justify-center items-center rounded-full shadow-[0_0_20px_rgba(255,255,255,0.5)] md:hidden transition-transform duration-300 ease-in-out ${
+            isVisible ? "translate-y-0" : "translate-y-28"
           }`}
         >
-          <LayoutList />
-        </button>
+          <LayoutList className="stroke-black" />
+        </Button>
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="sm:text-center">

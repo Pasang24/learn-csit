@@ -47,9 +47,9 @@ async function page({ params }) {
 
   return (
     <div className="flex justify-center">
-      <Container className="flex gap-4 min-h-[calc(100vh-109px)] relative">
+      <Container className="flex gap-4 relative">
         <QuestionMenu years={questionsYear} currentYear={params.year} />
-        <div className="md:ml-60">
+        <div className="flex-1 md:ml-48">
           <QuestionContainer questions={questions} year={params.year} />
         </div>
       </Container>

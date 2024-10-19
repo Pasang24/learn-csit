@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 
-function ChapterList({ chapters, currentChapter }) {
+function QuestionList({ years, currentYear }) {
   const listRef = useRef(null);
   const listTopRef = useRef(0);
   const [isSticky, setIsSticky] = useState(false);
@@ -38,24 +38,24 @@ function ChapterList({ chapters, currentChapter }) {
     <div
       ref={listRef}
       id="customList"
-      className={`hidden md:flex flex-col gap-3 border-r border-accent w-56 min-h-fit max-h-[calc(100vh-109px)] overflow-y-scroll ${
+      className={`hidden md:flex flex-col gap-3 border-r border-accent w-44 min-h-fit max-h-[calc(100vh-109px)] overflow-y-scroll ${
         isSticky ? "fixed top-3" : "absolute"
       }`}
     >
-      <h3 className="font-semibold">Chapters</h3>
-      {chapters.map((chapter) => (
+      <h3 className="font-semibold">Question Banks</h3>
+      {years.map((item) => (
         <Link
-          href={`${chapter.unit}`}
+          href={`${item.value}`}
           className={`font-medium text-slate-300 hover:underline ${
-            chapter.unit === currentChapter ? "underline" : ""
+            item.value === currentYear ? "underline" : ""
           }`}
-          key={chapter.unit}
+          key={item.value}
         >
-          {chapter.title}
+          {item.name}
         </Link>
       ))}
     </div>
   );
 }
 
-export default ChapterList;
+export default QuestionList;
