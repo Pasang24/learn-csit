@@ -10,40 +10,23 @@ import { db } from "@/app/firebaseConfig";
 import { BookOpenText } from "lucide-react";
 import Container from "@/components/custom/Container";
 import Link from "next/link";
+import Notes from "@/components/illustration/Notes";
 
 async function page({ params }) {
-  let questionsUnit = [];
   let questionsYear = [];
 
-  const questionsUnitQuery = query(
-    collection(db, "contents"),
-    where("subjectId", "==", params.subject),
-    orderBy("unit")
-  );
   const questionsYearQuery = query(
     collection(db, "questions"),
     and(where("subjectId", "==", params.subject), where("qNum", "==", 1)),
     orderBy("year")
   );
-  const [questionUnitSnapshot, questionsYearSnapshot] = await Promise.all([
-    await getDocs(questionsUnitQuery),
-    await getDocs(questionsYearQuery),
-  ]);
+  const questionsYearSnapshot = await getDocs(questionsYearQuery);
 
-  questionUnitSnapshot.forEach((doc) => {
-    let unit = doc.get("unit");
-    questionsUnit.push({ name: `Unit ${unit}`, value: unit });
-  });
   questionsYearSnapshot.forEach((doc) => {
     let year = doc.get("year");
     questionsYear.push({ name: `${year}`, value: year });
   });
 
-  // this line checks if we don't have past questions and modifies the arrays accordingly
-  if (questionsUnit.length === 0 || questionsYear.length === 0) {
-    questionsUnit = [{ name: "Not Available", value: "404" }];
-    questionsYear = [{ name: "Not Available", value: "404" }];
-  }
   return (
     <div className="flex justify-center">
       <Container className={"grid gap-2"}>
@@ -58,6 +41,14 @@ async function page({ params }) {
             <h3 className="font-semibold mb-2 sm:text-lg">{`Question Paper ${question.name}`}</h3>
           </Link>
         ))}
+        {questionsYear.length === 0 && (
+          <div className="max-w-72 place-self-center">
+            <Notes />
+            <h4 className="text-center text-xl font-semibold mt-4">
+              Past Questions Unavailable :(
+            </h4>
+          </div>
+        )}
       </Container>
     </div>
   );
