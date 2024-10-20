@@ -8,9 +8,32 @@ import {
 } from "firebase/firestore";
 import { db } from "@/app/firebaseConfig";
 import { BookOpenText } from "lucide-react";
+import { rankToSem } from "@/utilities/rankToSem";
 import Container from "@/components/custom/Container";
 import Link from "next/link";
 import Notes from "@/components/illustration/Notes";
+
+export async function generateStaticParams() {
+  let courseData = [];
+
+  const querySnapshot = await getDocs(collection(db, "semesters"));
+  querySnapshot.forEach((doc) => {
+    courseData.push(doc.data());
+  });
+
+  let paramsData = [];
+
+  courseData.forEach((course) => {
+    let sem = rankToSem(course.rank);
+    const subjectData = course.subs.map((sub) => ({
+      sem,
+      subject: sub.name.split(" ").join("-"),
+    }));
+    paramsData = [...paramsData, ...subjectData];
+  });
+
+  return paramsData;
+}
 
 async function page({ params }) {
   let questionsYear = [];
