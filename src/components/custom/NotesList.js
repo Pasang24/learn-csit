@@ -28,7 +28,6 @@ function NotesList({ notes, notesDownload }) {
               src={note}
               alt={`Page ${index + 1}`}
               key={index}
-              loading="lazy"
             />
           </div>
         ))}
