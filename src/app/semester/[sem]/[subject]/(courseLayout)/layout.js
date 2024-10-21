@@ -17,6 +17,7 @@ async function layout({ params, children }) {
 
   const subData = subSnap.data();
 
+  // root path of the syllabus folder
   const rootRef = `${params.sem}/${subData.title}/syllabus`;
   // fetching list of syllabus data for the subject
   const syllabusList = await listAll(ref(storage, `${rootRef}/images`));
@@ -34,9 +35,14 @@ async function layout({ params, children }) {
   );
 
   // fetching pdf download URL for syllabus
-  const syllabusDownloadUrl = await getDownloadURL(
-    ref(storage, `${rootRef}/pdf/syllabus.pdf`)
-  );
+  let syllabusDownloadUrl = "";
+  try {
+    syllabusDownloadUrl = await getDownloadURL(
+      ref(storage, `${rootRef}/pdf/syllabus.pdf`)
+    );
+  } catch (error) {
+    console.log(error);
+  }
 
   return (
     <>

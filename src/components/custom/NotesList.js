@@ -1,19 +1,47 @@
 "use client";
 
-function NotesList({ notes }) {
+import Image from "next/image";
+import useModal from "@/hooks/useModal";
+import { useState } from "react";
+import ImageViewer from "./ImageViewer";
+
+function NotesList({ notes, notesDownload }) {
+  const { isOpen, openModal, closeModal } = useModal();
+  const [index, setIndex] = useState(0);
   return (
-    <div className="grid grid-cols-3 vs:grid-cols-4 lg:grid-cols-5 gap-2">
-      {Array(20)
-        .fill(0)
-        .map((_, index) => (
+    <>
+      <div className="grid grid-cols-3 vs:grid-cols-4 lg:grid-cols-5 gap-2">
+        {notes.map((note, index) => (
           <div
-            className="bg-accent aspect-[1/1.14] flex justify-center items-center"
+            onClick={() => {
+              setIndex(index);
+              openModal();
+            }}
+            className="flex justify-center items-center aspect-square overflow-hidden"
             key={index}
           >
-            <span>Image</span>
+            <Image
+              className="w-full object-cover cursor-pointer hover:scale-110"
+              style={{ transition: "0.3s all ease" }}
+              width={500}
+              height={500}
+              src={note}
+              alt={`Page ${index + 1}`}
+              key={index}
+              loading="lazy"
+            />
           </div>
         ))}
-    </div>
+      </div>
+      <ImageViewer
+        images={notes}
+        download={notesDownload}
+        visible={isOpen}
+        onClose={closeModal}
+        index={index}
+        onIndexChange={setIndex}
+      />
+    </>
   );
 }
 
