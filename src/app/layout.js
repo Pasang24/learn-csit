@@ -20,6 +20,13 @@ export const metadata = {
   description: "This website provides resources for CSIT students",
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximunScale: 1,
+  userScalable: false,
+};
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en">

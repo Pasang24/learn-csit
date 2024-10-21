@@ -17,11 +17,11 @@ function NotesList({ notes, notesDownload }) {
               setIndex(index);
               openModal();
             }}
-            className="flex justify-center items-center aspect-square overflow-hidden"
+            className="bg-accent flex justify-center items-center aspect-square overflow-hidden"
             key={index}
           >
             <Image
-              className="w-full object-cover cursor-pointer hover:scale-110"
+              className="w-full h-full object-cover cursor-pointer hover:scale-110"
               style={{ transition: "0.3s all ease" }}
               width={500}
               height={500}
