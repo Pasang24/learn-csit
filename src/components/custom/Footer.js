@@ -5,6 +5,7 @@ import Container from "./Container";
 import Link from "next/link";
 import semData from "@/data/semData";
 import { useParams, usePathname } from "next/navigation";
+import { useEffect } from "react";
 
 function Footer() {
   const pathname = usePathname();
@@ -15,6 +16,17 @@ function Footer() {
   let year = params?.year;
 
   let hasUnitOrYear = unit || year;
+
+  useEffect(() => {
+    const preventContextMenu = (event) => {
+      event.preventDefault();
+    };
+    window.addEventListener("contextmenu", preventContextMenu);
+
+    return () => {
+      window.removeEventListener("contextmenu", preventContextMenu);
+    };
+  }, []);
 
   // If there is unit or year, don't render the footer
   return !hasUnitOrYear ? (
