@@ -3,6 +3,7 @@
 import { MathJaxContext, MathJax } from "better-react-mathjax";
 import { convertToWords } from "react-number-to-words";
 import parse from "html-react-parser";
+import { QuestionItem } from "./QuestionItem";
 
 function QuestionContainer({ subject, questions, year }) {
   const longQuestions = questions.filter(
@@ -61,12 +62,7 @@ function QuestionContainer({ subject, questions, year }) {
             Attempt any {attemptLong?.toUpperCase()} questions
           </h3>
           {longQuestions.map((question, index) => (
-            <div className="flex items-start gap-1 vs:gap-3" key={index}>
-              <div className="font-semibold">{question.qNum}.</div>
-              <MathJax hideUntilTypeset={"first"} inline dynamic>
-                <div>{parse(question?.title)}</div>
-              </MathJax>
-            </div>
+            <QuestionItem question={question} key={index} />
           ))}
         </div>
         <div className="grid gap-6 sm:gap-7 mt-6">
@@ -75,12 +71,7 @@ function QuestionContainer({ subject, questions, year }) {
             Attempt any {attemptShort?.toUpperCase()} questions
           </h3>
           {shortQuestions.map((question, index) => (
-            <div className="flex items-start gap-1 vs:gap-3" key={index}>
-              <div className="font-semibold">{question.qNum}.</div>
-              <MathJax hideUntilTypeset={"first"} inline dynamic>
-                <div>{parse(question.title)}</div>
-              </MathJax>
-            </div>
+            <QuestionItem question={question} key={index} />
           ))}
         </div>
       </div>
