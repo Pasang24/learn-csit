@@ -8,19 +8,28 @@ import {
 } from "@/components/ui/dialog";
 import {
   Drawer,
-  DrawerClose,
   DrawerContent,
   DrawerDescription,
-  DrawerFooter,
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { MathJax } from "better-react-mathjax";
 import { useMediaQuery } from "usehooks-ts";
+import { memo } from "react";
 import useModal from "@/hooks/useModal";
 import parse from "html-react-parser";
 import Confused from "../illustration/Confused";
+
+// Creating a memoized component for the parsed title
+const ParsedTitle = memo(({ qNum, title }) => (
+  <>
+    <div>{qNum}.</div>
+    <MathJax hideUntilTypeset={"first"} inline dynamic>
+      <div>{parse(title)}</div>
+    </MathJax>
+  </>
+));
 
 export function QuestionItem({ question }) {
   const { isOpen, openModal, closeModal } = useModal();
@@ -43,10 +52,7 @@ export function QuestionItem({ question }) {
       >
         <DialogTrigger asChild>
           <button className="w-fit flex items-start gap-1 vs:gap-3 hover:text-slate-300 text-left">
-            <div className="font-semibold">{question.qNum}.</div>
-            <MathJax hideUntilTypeset={"first"} inline dynamic>
-              <div>{parse(question.title)}</div>
-            </MathJax>
+            <ParsedTitle qNum={question.qNum} title={question.title} />
           </button>
         </DialogTrigger>
         <DialogContent
@@ -55,10 +61,7 @@ export function QuestionItem({ question }) {
         >
           <DialogHeader>
             <DialogTitle className="flex items-start gap-3 my-4 leading-7">
-              <div>{question.qNum}.</div>
-              <MathJax hideUntilTypeset={"first"} inline dynamic>
-                <div>{parse(question.title)}</div>
-              </MathJax>
+              <ParsedTitle qNum={question.qNum} title={question.title} />
             </DialogTitle>
             <DialogDescription className="text-base">Answer:</DialogDescription>
           </DialogHeader>
@@ -77,6 +80,7 @@ export function QuestionItem({ question }) {
 
   return (
     <Drawer
+      shouldScaleBackground
       open={isOpen}
       onOpenChange={() => {
         if (isOpen) {
@@ -89,19 +93,13 @@ export function QuestionItem({ question }) {
     >
       <DrawerTrigger asChild>
         <button className="w-fit flex items-start gap-1 vs:gap-3 hover:text-slate-300 text-left">
-          <div className="font-semibold">{question.qNum}.</div>
-          <MathJax hideUntilTypeset={"first"} inline dynamic>
-            <div>{parse(question.title)}</div>
-          </MathJax>
+          <ParsedTitle qNum={question.qNum} title={question.title} />
         </button>
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="text-left">
           <DrawerTitle className="flex items-start gap-3 my-4 leading-7">
-            <div>{question.qNum}.</div>
-            <MathJax hideUntilTypeset={"first"} inline dynamic>
-              <div>{parse(question.title)}</div>
-            </MathJax>
+            <ParsedTitle qNum={question.qNum} title={question.title} />
           </DrawerTitle>
           <DrawerDescription className="text-base">Answer:</DrawerDescription>
         </DrawerHeader>
