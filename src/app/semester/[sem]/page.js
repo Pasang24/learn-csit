@@ -59,7 +59,9 @@ async function page({ params }) {
   return (
     <div className="flex justify-center">
       <Container>
-        <BreadCrumbs currentPages={["Semester", `${params.sem} Semester`]} />
+        <BreadCrumbs
+          crumbs={[{ name: "Semester" }, { name: `${params.sem} Semester` }]}
+        />
         <div>
           <h2 className="text-center text-2xl font-bold my-6">Subjects</h2>
           <div className="grid gap-2">

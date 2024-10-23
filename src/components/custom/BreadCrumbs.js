@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import {
   Breadcrumb,
+  BreadcrumbEllipsis,
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
@@ -9,30 +10,32 @@ import {
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
 
-function BreadCrumbs({ links = [], currentPages = [] }) {
+function BreadCrumbs({ crumbs = [], className = "" }) {
   return (
     <Breadcrumb>
-      <BreadcrumbList>
+      <BreadcrumbList className={className}>
         <BreadcrumbItem>
           <BreadcrumbLink asChild>
             <Link href="/">Home</Link>
           </BreadcrumbLink>
         </BreadcrumbItem>
-        {links.map((link, index) => (
+        {crumbs.map((crumb, index) => (
           <React.Fragment key={index}>
             <BreadcrumbSeparator />
             <BreadcrumbItem>
-              <BreadcrumbLink className="capitalize" asChild>
-                <Link href={link.href}>{link.name}</Link>
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-          </React.Fragment>
-        ))}
-        {currentPages.map((page, index) => (
-          <React.Fragment key={index}>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem>
-              <BreadcrumbPage className="capitalize">{page}</BreadcrumbPage>
+              {crumb.href ? (
+                <BreadcrumbLink className="capitalize" asChild>
+                  <Link href={crumb.href}>{crumb.name}</Link>
+                </BreadcrumbLink>
+              ) : (
+                <BreadcrumbPage className="capitalize">
+                  {crumbs.length > 2 && index === 0 ? (
+                    <BreadcrumbEllipsis />
+                  ) : (
+                    crumb.name
+                  )}
+                </BreadcrumbPage>
+              )}
             </BreadcrumbItem>
           </React.Fragment>
         ))}

@@ -1,10 +1,11 @@
 import Container from "@/components/custom/Container";
 import ViewSyllabus from "@/components/custom/ViewSyllabus";
+import SubjectNavBar from "@/components/custom/SubjectNavBar";
+import BreadCrumbs from "@/components/custom/BreadCrumbs";
 import { db, storage } from "@/app/firebaseConfig";
 import { doc, getDoc } from "firebase/firestore";
 import { notFound } from "next/navigation";
 import { getDownloadURL, listAll, ref } from "firebase/storage";
-import SubjectNavBar from "@/components/custom/SubjectNavBar";
 
 async function layout({ params, children }) {
   // fetching subject data from firebase
@@ -45,36 +46,43 @@ async function layout({ params, children }) {
   }
 
   return (
-    <>
-      {"unit" in params ? undefined : (
-        <div className="flex justify-center">
-          <Container>
-            <div className="flex flex-col gap-3">
-              <h2 className="font-bold text-xl">
-                {subData.title} ({subData.code})
-              </h2>
-              <div>
-                <h3 className="font-semibold mb-1">Course Description:</h3>
-                <p className="text-sm">{subData.desc}</p>
-              </div>
-              <div>
-                <h3 className="font-semibold mb-1">Course Objective:</h3>
-                <p className="text-sm">{subData.obj}</p>
-              </div>
-              <div className="self-start flex items-center gap-2">
-                <ViewSyllabus
-                  imageUrls={syllabusImageUrls}
-                  downloadUrl={syllabusDownloadUrl}
-                />
-              </div>
-              <hr className="my-2" />
-              <SubjectNavBar />
-            </div>
-          </Container>
+    <div className="flex flex-col items-center">
+      <Container>
+        <BreadCrumbs
+          crumbs={[
+            { name: "Semester" },
+            {
+              name: `${params.sem} Semester`,
+              href: `/semester/${params.sem}/`,
+            },
+            { name: subData.title },
+          ]}
+          className="-mt-2"
+        />
+        <div className="flex flex-col gap-3 mt-6">
+          <h2 className="font-bold text-xl">
+            {subData.title} ({subData.code})
+          </h2>
+          <div>
+            <h3 className="font-semibold mb-1">Course Description:</h3>
+            <p className="text-sm">{subData.desc}</p>
+          </div>
+          <div>
+            <h3 className="font-semibold mb-1">Course Objective:</h3>
+            <p className="text-sm">{subData.obj}</p>
+          </div>
+          <div className="self-start flex items-center gap-2">
+            <ViewSyllabus
+              imageUrls={syllabusImageUrls}
+              downloadUrl={syllabusDownloadUrl}
+            />
+          </div>
+          <hr className="my-2" />
+          <SubjectNavBar />
         </div>
-      )}
+      </Container>
       {children}
-    </>
+    </div>
   );
 }
 
