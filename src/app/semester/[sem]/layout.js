@@ -4,7 +4,7 @@ import { validSem } from "@/utilities/validSem";
 function SemLayout({ params, children }) {
   if (!validSem(params.sem)) return notFound();
 
-  return <>{children}</>;
+  return children;
 }
 
 export default SemLayout;

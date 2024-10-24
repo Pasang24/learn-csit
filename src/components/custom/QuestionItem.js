@@ -14,20 +14,16 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { MathJax } from "better-react-mathjax";
 import { useMediaQuery } from "usehooks-ts";
 import { memo } from "react";
 import useModal from "@/hooks/useModal";
-import parse from "html-react-parser";
 import Confused from "../illustration/Confused";
 
 // Creating a memoized component for the parsed title
 const ParsedTitle = memo(({ qNum, title }) => (
   <>
     <div>{qNum}.</div>
-    <MathJax hideUntilTypeset={"first"} inline dynamic>
-      <div>{parse(title)}</div>
-    </MathJax>
+    <div dangerouslySetInnerHTML={{ __html: title }} />
   </>
 ));
 
