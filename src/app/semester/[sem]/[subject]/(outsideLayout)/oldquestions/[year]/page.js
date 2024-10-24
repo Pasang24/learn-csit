@@ -59,14 +59,6 @@ export async function generateStaticParams() {
 }
 
 async function page({ params }) {
-  const questionsQuery = query(
-    collection(db, "questions"),
-    and(
-      where("subjectId", "==", params.subject),
-      where("year", "==", params.year)
-    ),
-    orderBy("qNum")
-  );
   const questionsYearQuery = query(
     collection(db, "questions"),
     and(where("subjectId", "==", params.subject), where("qNum", "==", 1)),
@@ -74,23 +66,31 @@ async function page({ params }) {
   );
   const subjectRef = doc(db, "subjects", params.subject);
 
-  const [questionsSnapshot, questionsYearSnapshot, subjectSnapShot] =
-    await Promise.all([
-      await getDocs(questionsQuery),
-      await getDocs(questionsYearQuery),
-      await getDoc(subjectRef),
-    ]);
+  // fetching questions from server which will parse math equations into svg
+  const questionsResponse = await fetch(`${process.env.SERVER_URL}/convert`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      subject: params.subject,
+      year: params.year,
+    }),
+  });
+
+  const questionsJson = await questionsResponse.json();
+
+  const [questionsYearSnapshot, subjectSnapShot] = await Promise.all([
+    await getDocs(questionsYearQuery),
+    await getDoc(subjectRef),
+  ]);
 
   // if questions of selected year doesn't exist then return to Not Found page
-  if (questionsSnapshot.empty) return notFound();
+  if (!questionsJson?.questions?.length) return notFound();
 
+  let questions = questionsJson?.questions || [];
   let subject = subjectSnapShot.data();
-  let questions = [];
   let questionsYear = [];
-
-  questionsSnapshot.forEach((doc) => {
-    questions.push(doc.data());
-  });
 
   questionsYearSnapshot.forEach((doc) => {
     let year = doc.get("year");
