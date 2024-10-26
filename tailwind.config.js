@@ -6,6 +6,16 @@ module.exports = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  // safelist classes for dangerously set html content
+  safelist: [
+    //safelist classes for table
+    "grid",
+    "grid-cols-7",
+    "border-white",
+    "max-w-[640px]",
+    "col-span-3",
+    "col-span-4",
+  ],
   theme: {
     extend: {
       screens: {
