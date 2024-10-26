@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/drawer";
 import { useMediaQuery } from "usehooks-ts";
 import { memo } from "react";
+import parser from "html-react-parser";
 import useModal from "@/hooks/useModal";
 import Confused from "../illustration/Confused";
 
@@ -23,7 +24,7 @@ import Confused from "../illustration/Confused";
 const ParsedTitle = memo(({ qNum, title }) => (
   <>
     <div>{qNum}.</div>
-    <div dangerouslySetInnerHTML={{ __html: title }} />
+    <div>{parser(title)}</div>
   </>
 ));
 
