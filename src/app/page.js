@@ -5,6 +5,7 @@ import Box from "@/components/custom/Box";
 import BoxContainer from "@/components/custom/BoxContainer";
 import semData from "@/data/semData";
 import TypeWriter from "@/components/custom/TypeWriter";
+import RecentNotices from "@/components/custom/RecentNotices";
 
 export default function Home() {
   return (
@@ -50,22 +51,7 @@ export default function Home() {
           </BoxContainer>
         </Container>
       </section>
-      <section className="flex justify-center mt-6">
-        <Container>
-          <h2 className="font-bold text-2xl vvs:text-3xl mb-12">
-            Recent Notices
-          </h2>
-          <div className="mb-6">
-            <h3 className="font-bold text-2xl text-center">Coming soon!</h3>
-          </div>
-          <Link
-            href={"/notices"}
-            className="bg-white text-black px-4 py-2 rounded font-semibold "
-          >
-            View All Notices
-          </Link>
-        </Container>
-      </section>
+      <RecentNotices />
     </div>
   );
 }

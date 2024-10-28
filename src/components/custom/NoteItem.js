@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import { Skeleton } from "@/components/ui/skeleton";
 
 function NoteItem({ note, onClick, noteNum }) {
   const [showImage, setShowImage] = useState(false);
-
-  useEffect(() => {
-    setShowImage(false);
-  }, [note]);
 
   return (
     <button
