@@ -1,43 +1,27 @@
-"use client";
-
-import { memo, useEffect, useState } from "react";
 import Container from "./Container";
-import { fetchRecentNotices } from "@/actions/fetchNotices";
-import { Skeleton } from "../ui/skeleton";
 import Link from "next/link";
+import { unstable_cache } from "next/cache";
+import { db } from "@/app/firebaseConfig";
+import { collection, getDocs, limit, orderBy, query } from "firebase/firestore";
 
-function RecentNotices() {
-  const [recentNotices, setRecentNotices] = useState([]);
-  const [loading, setLoading] = useState(true);
+async function RecentNotices() {
+  const getRecentNotices = unstable_cache(
+    async () => {
+      const noticesSnapshot = await getDocs(
+        query(collection(db, "notices"), orderBy("timestamp", "desc"), limit(6))
+      );
+      let recentNotices = [];
+      noticesSnapshot.forEach((notice) => {
+        const { title, date, link } = notice.data();
+        recentNotices.push({ title, date, link });
+      });
+      return recentNotices;
+    },
+    ["recent-notices"],
+    { tags: ["recent-notices"] }
+  );
 
-  const MemoizedSkeleton = memo(function MemoizedSkeleton() {
-    return (
-      <>
-        {Array(6)
-          .fill(0)
-          .map((_, index) => (
-            <Skeleton className="w-full h-[78px]" key={index} />
-          ))}
-      </>
-    );
-  });
-
-  useEffect(() => {
-    const fetchNotices = async () => {
-      setLoading(true);
-      try {
-        const notices = await fetchRecentNotices();
-        setRecentNotices(notices);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchNotices();
-  }, []);
-
+  const recentNotices = await getRecentNotices();
   return (
     <section className="flex justify-center mt-6">
       <Container>
@@ -45,7 +29,6 @@ function RecentNotices() {
           Recent Notices
         </h2>
         <div className="grid gap-3 mb-6">
-          {loading && <MemoizedSkeleton />}
           {recentNotices.map((notice, index) => (
             <div className="flex flex-col gap-2 p-3 border rounded" key={index}>
               <span className="text-base font-semibold">{notice?.title}</span>
