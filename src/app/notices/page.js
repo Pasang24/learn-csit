@@ -5,7 +5,7 @@ import { db } from "../firebaseConfig";
 import { unstable_cache } from "next/cache";
 
 async function page() {
-  const perPage = 10;
+  const perPage = 12;
   const fetchInitialNotices = unstable_cache(
     async () => {
       const noticesSnapshot = await getDocs(
@@ -28,8 +28,8 @@ async function page() {
 
       return { recentNotices, lastSequenceNum };
     },
-    ["initial-notices"],
-    { tags: ["initial-notices"] }
+    ["notices"],
+    { tags: ["notices"] }
   );
 
   const { recentNotices, lastSequenceNum } = await fetchInitialNotices();
@@ -38,6 +38,7 @@ async function page() {
   return (
     <div className="flex justify-center">
       <Container>
+        <h2 className="font-bold text-2xl vvs:text-3xl mb-6">All Notices</h2>
         <InfiniteNoticesList
           initialNotices={recentNotices}
           initialLastSequenceNum={lastSequenceNum}

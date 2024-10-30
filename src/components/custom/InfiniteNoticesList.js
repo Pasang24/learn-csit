@@ -2,6 +2,7 @@
 
 import { fetchNextPage } from "@/actions/fetchNotice";
 import { useEffect, useRef, useState } from "react";
+import SpinnerLoader from "../loaders/SpinnerLoader";
 
 function InfiniteNoticesList({
   initialNotices,
@@ -54,21 +55,22 @@ function InfiniteNoticesList({
     return () => observer.disconnect();
   }, [hasMore, loading, lastSequenceNum]);
 
-  useEffect(() => {
-    console.log(lastSequenceNum);
-  }, [lastSequenceNum]);
   return (
     <>
-      <div className="grid gap-3 mb-6">
+      <div className="grid mb-6">
         {notices.map((notice, index) => (
-          <div className="flex flex-col gap-2 p-3 border rounded" key={index}>
+          <div className="flex flex-col gap-2 p-4 border-b" key={index}>
             <span className="text-base font-semibold">{notice?.title}</span>
             <span className="text-sm">{notice?.date}</span>
           </div>
         ))}
       </div>
-      {loading && "Loading..."}
-      <div ref={observerTarget} className="h-5" />
+      {loading && (
+        <div className="flex justify-center">
+          <SpinnerLoader />
+        </div>
+      )}
+      <div ref={observerTarget} className="h-1" />
     </>
   );
 }

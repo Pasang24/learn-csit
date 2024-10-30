@@ -16,6 +16,7 @@ function Footer() {
   let year = params?.year;
 
   let hasUnitOrYear = unit || year;
+  let isNoticeRoute = pathname === "/notices";
 
   useEffect(() => {
     const preventContextMenu = (event) => {
@@ -29,7 +30,7 @@ function Footer() {
   }, []);
 
   // If there is unit or year, don't render the footer
-  return !hasUnitOrYear ? (
+  return !hasUnitOrYear && !isNoticeRoute ? (
     <footer className="flex justify-center border-t border-accent mt-6">
       <Container className="flex flex-col gap-6">
         <div className="flex flex-wrap gap-10 w-full">

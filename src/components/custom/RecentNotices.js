@@ -8,7 +8,11 @@ async function RecentNotices() {
   const getRecentNotices = unstable_cache(
     async () => {
       const noticesSnapshot = await getDocs(
-        query(collection(db, "notices"), orderBy("timestamp", "desc"), limit(6))
+        query(
+          collection(db, "notices"),
+          orderBy("timestamp", "desc"),
+          limit(12)
+        )
       );
       let recentNotices = [];
       noticesSnapshot.forEach((notice) => {
@@ -17,8 +21,8 @@ async function RecentNotices() {
       });
       return recentNotices;
     },
-    ["recent-notices"],
-    { tags: ["recent-notices"] }
+    ["notices"],
+    { tags: ["notices"] }
   );
 
   const recentNotices = await getRecentNotices();
@@ -28,9 +32,9 @@ async function RecentNotices() {
         <h2 className="font-bold text-2xl vvs:text-3xl mb-12">
           Recent Notices
         </h2>
-        <div className="grid gap-3 mb-6">
+        <div className="grid mb-6">
           {recentNotices.map((notice, index) => (
-            <div className="flex flex-col gap-2 p-3 border rounded" key={index}>
+            <div className="flex flex-col gap-2 p-4 border-b" key={index}>
               <span className="text-base font-semibold">{notice?.title}</span>
               <span className="text-sm">{notice?.date}</span>
             </div>
