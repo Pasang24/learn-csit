@@ -29,10 +29,13 @@ async function RecentNotices() {
   return (
     <section className="flex justify-center mt-6">
       <Container>
-        <h2 className="font-bold text-2xl vvs:text-3xl mb-12">
+        <h2
+          className="font-bold text-2xl vvs:text-3xl mb-4"
+          id="recent-notices-heading"
+        >
           Recent Notices
         </h2>
-        <div className="grid mb-6">
+        <div className="grid mb-6" id="receent-notices-container">
           {recentNotices.map((notice, index) => (
             <div className="flex flex-col gap-2 p-4 border-b" key={index}>
               <span className="text-base font-semibold">{notice?.title}</span>
@@ -42,7 +45,8 @@ async function RecentNotices() {
         </div>
         <Link
           href={"/notices"}
-          className="bg-white text-black px-4 py-2 rounded font-semibold "
+          className="bg-white text-black px-4 py-2 rounded font-semibold"
+          id="all-noticces-btn"
         >
           View All Notices
         </Link>

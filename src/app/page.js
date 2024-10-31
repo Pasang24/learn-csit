@@ -26,26 +26,27 @@ export default function Home() {
       </header>
       <section className="flex justify-center mt-6">
         <Container>
-          <h2 className="font-bold text-xl vvs:text-2xl text-center mb-8">
+          <h2
+            className="font-bold text-xl vvs:text-2xl text-center mb-8"
+            id="semesters-heading"
+          >
             Choose any Semester and get it's resources
           </h2>
-          <div id="semesters-container">
-            <BoxContainer>
-              {semData.map(({ name, href, subjects }, index) => (
-                <Box href={href} key={index}>
-                  <span className="font-semibold text-xl sm:text-2xl">
-                    {index + 1}.
+          <BoxContainer id="semesters-container">
+            {semData.map(({ name, href, subjects }, index) => (
+              <Box href={href} key={index}>
+                <span className="font-semibold text-xl sm:text-2xl">
+                  {index + 1}.
+                </span>
+                <div className="flex flex-col gap-1">
+                  <span className="font-semibold text-base">{name}</span>
+                  <span className="font-semibold text-slate-300">
+                    Subjects: {subjects}
                   </span>
-                  <div className="flex flex-col gap-1">
-                    <span className="font-semibold text-base">{name}</span>
-                    <span className="font-semibold text-slate-300">
-                      Subjects: {subjects}
-                    </span>
-                  </div>
-                </Box>
-              ))}
-            </BoxContainer>
-          </div>
+                </div>
+              </Box>
+            ))}
+          </BoxContainer>
         </Container>
       </section>
       <RecentNotices />
