@@ -41,7 +41,7 @@ function TourButton() {
         },
       },
       {
-        element: "#receent-notices-container div:first-child",
+        element: "#receent-notices-container a:first-child",
         popover: {
           title: "Accessing the notice",
           description: "Select the notice you want to access such as this one.",
