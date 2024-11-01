@@ -59,10 +59,16 @@ function InfiniteNoticesList({
     <>
       <div className="grid mb-6">
         {notices.map((notice, index) => (
-          <div className="flex flex-col gap-2 p-4 border-b" key={index}>
+          <a
+            href={notice?.link}
+            target="_blank"
+            className="flex flex-col gap-2 p-4 border-b rounded hover:bg-accent"
+            style={{ transition: "0.1s all ease" }}
+            key={index}
+          >
             <span className="text-base font-semibold">{notice?.title}</span>
             <span className="text-sm">{notice?.date}</span>
-          </div>
+          </a>
         ))}
       </div>
       {loading && (
