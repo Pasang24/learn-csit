@@ -65,7 +65,7 @@ function SideBar() {
             </AccordionItem>
           </Accordion>
           <SideLink title={"Entrance"} href={"/entrance"} />
-          <SideLink title={"Notices"} href={"/entrance"} />
+          <SideLink title={"Notices"} href={"/notices"} />
           <SideLink title={"Course Details"} href={"/coursedetails"} />
         </div>
       </SheetContent>
