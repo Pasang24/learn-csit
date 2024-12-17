@@ -11,10 +11,13 @@ module.exports = {
     //safelist classes for table
     "grid",
     "grid-cols-7",
+    "grid-cols-9",
     "border-white",
     "max-w-[640px]",
+    "col-span-2",
     "col-span-3",
     "col-span-4",
+    "col-span-6",
   ],
   theme: {
     extend: {
