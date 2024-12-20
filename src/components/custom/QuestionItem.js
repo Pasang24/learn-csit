@@ -112,7 +112,7 @@ export function QuestionItem({ question }) {
         >
           <div className="flex justify-center mb-4">
             {question?.answer ? (
-              <div className="p-3">
+              <div>
                 <ParsedAnswer answer={question?.answer} />
               </div>
             ) : (
