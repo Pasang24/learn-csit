@@ -107,14 +107,12 @@ export function QuestionItem({ question }) {
           <DrawerDescription className="text-base">Answer:</DrawerDescription>
         </DrawerHeader>
         <DrawerFooter
-          className="h-fit max-h-[calc(100vh-83px)] overflow-y-auto"
+          className="h-fit max-h-[calc(100dvh-83px)] overflow-y-auto"
           id="customScrollBar"
         >
           <div className="flex justify-center mb-4">
             {question?.answer ? (
-              <div>
-                <ParsedAnswer answer={question?.answer} />
-              </div>
+              <ParsedAnswer answer={question?.answer} />
             ) : (
               <div className="max-w-96">
                 <Confused />
