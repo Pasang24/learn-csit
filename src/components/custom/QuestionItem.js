@@ -11,6 +11,7 @@ import {
   DrawerContent,
   DrawerDescription,
   DrawerHeader,
+  DrawerFooter,
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
@@ -27,12 +28,15 @@ const ParsedTitle = memo(({ qNum, title }) => (
   </>
 ));
 
+const ParsedAnswer = memo(({ answer }) => (
+  <div dangerouslySetInnerHTML={{ __html: answer }} />
+));
+
 export function QuestionItem({ question }) {
   const { isOpen, openModal, closeModal } = useModal();
   const isDesktopOrLaptop = useMediaQuery("(min-width: 768px)", {
     initializeWithValue: false,
   });
-
   if (isDesktopOrLaptop) {
     return (
       <Dialog
@@ -62,12 +66,16 @@ export function QuestionItem({ question }) {
             <DialogDescription className="text-base">Answer:</DialogDescription>
           </DialogHeader>
           <div className="flex justify-center mb-3">
-            <div className="w-96">
-              <Confused />
-              <h3 className="text-center text-2xl font-semibold">
-                Answer Unavailable :(
-              </h3>
-            </div>
+            {question?.answer ? (
+              <ParsedAnswer answer={question?.answer} />
+            ) : (
+              <div className="w-96">
+                <Confused />
+                <h3 className="text-center text-2xl font-semibold">
+                  Answer Unavailable :(
+                </h3>
+              </div>
+            )}
           </div>
         </DialogContent>
       </Dialog>
@@ -76,7 +84,6 @@ export function QuestionItem({ question }) {
 
   return (
     <Drawer
-      shouldScaleBackground
       open={isOpen}
       onOpenChange={() => {
         if (isOpen) {
@@ -94,19 +101,30 @@ export function QuestionItem({ question }) {
       </DrawerTrigger>
       <DrawerContent>
         <DrawerHeader className="text-left">
-          <DrawerTitle className="flex items-start gap-3 my-4 leading-7">
+          {/* <DrawerTitle className="flex items-start gap-3 my-4 leading-7">
             <ParsedTitle qNum={question.qNum} title={question.title} />
-          </DrawerTitle>
+          </DrawerTitle> */}
           <DrawerDescription className="text-base">Answer:</DrawerDescription>
         </DrawerHeader>
-        <div className="flex justify-center mb-4">
-          <div className="max-w-96">
-            <Confused />
-            <h3 className="text-center text-xl font-semibold">
-              Answer Unavailable :(
-            </h3>
+        <DrawerFooter
+          className="h-fit max-h-[calc(100vh-83px)] overflow-y-auto"
+          id="customScrollBar"
+        >
+          <div className="flex justify-center mb-4">
+            {question?.answer ? (
+              <div className="p-3">
+                <ParsedAnswer answer={question?.answer} />
+              </div>
+            ) : (
+              <div className="max-w-96">
+                <Confused />
+                <h3 className="text-center text-xl font-semibold">
+                  Answer Unavailable :(
+                </h3>
+              </div>
+            )}
           </div>
-        </div>
+        </DrawerFooter>
       </DrawerContent>
     </Drawer>
   );
