@@ -10,6 +10,7 @@ module.exports = {
   safelist: [
     //safelist classes for table
     "grid",
+    "grid-cols-2",
     "grid-cols-7",
     "grid-cols-9",
     "border-white",
