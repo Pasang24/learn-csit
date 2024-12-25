@@ -29,7 +29,7 @@ const ParsedTitle = memo(({ qNum, title }) => (
 ));
 
 const ParsedAnswer = memo(({ answer }) => (
-  <div dangerouslySetInnerHTML={{ __html: answer }} />
+  <div className="w-full" dangerouslySetInnerHTML={{ __html: answer }} />
 ));
 
 export function QuestionItem({ question }) {
